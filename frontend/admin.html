@@ -177,7 +177,6 @@ function escapeHtml(text) {
 container.innerHTML = blogs.map(post => `
     <div class="blog-card" id="blog-card-${post.id}">
         <h2 class="blog-id">${post.id}</h2> 
-        /* Мы убрали префикс /uploads/, чтобы ссылка шла напрямую в Cloudinary */
         ${post.image_name ? `<img src="${post.image_name}">` : ''}
         <div class="blog-card-content">
             <!-- Защищаем заголовок -->
