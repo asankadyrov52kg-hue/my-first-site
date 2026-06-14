@@ -1,5 +1,5 @@
 //  const BASE_API_URL = "https://manned-untolerated-mallie.ngrok-free.dev"
- const BASE_API_URL = "http://localhost:3000"
+ const BASE_API_URL = "https://ticlo.onrender.com"
  
  function escapeHtml(text) {
     if (!text) return '';
