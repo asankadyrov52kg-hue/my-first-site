@@ -180,45 +180,45 @@
 
     </main>
 
-  <footer class="request">
-    <div class="request__container">
+    <footer class="request">
+        <div class="request__container">
 
-      <div class="ticlo__div">
-        <img src="./assets/images/Group 5.svg" alt="">
-        <p>Швейное производсто Ticlo специализируется на быстром и качественном пошиве партий любого объема</p>
-      </div>
-      <div class="kontact">
-        <h2>Контакты</h2>
-        <p>Мы работаем с ПН-СБ:9.00:19:00</p>
-        <p>Кыргызстан,г.Бишкек,Тушинсий переулок, 2</p>
-        <a href="tel:+996880600700" class="foot__link phone"><img src="./assets/images/phone-svgrepo-com.svg"
-            alt="">+996880600700</a>
-        <a href="" class="foot__link"><img src="./assets/images/svg_max.svg" alt=""> мы есть в Max</a>
-        <a href="mailto:Jyldyz.tasu@gmail.com" class="foot__link mail"><img src="./assets/images/mail-svgrepo-com.svg"
-            alt="">Jyldyz.tasu@gmail.com</a>
-      </div>
-      <div class="navigation">
-        <ul>
-          <li><strong>Навигация</strong></li>
-          <li><a href="">О нас</a></li>
-          <li><a href="">Наши услуги</a></li>
-          <li><a href="">Каталог</a></li>
-          <li><a href="">Наш блог</a></li>
-        </ul>
-      </div>
-      <button class="request__btn req__btn"><img
-          src="./assets/images/contract-with-pen-svgrepo-com.svg" alt="">оставить заявку</button>
+            <div class="ticlo__div">
+                <img src="./assets/images/Group 5.svg" alt="">
+                <p>Швейное производсто Ticlo специализируется на быстром и качественном пошиве партий любого объема</p>
+            </div>
+            <div class="kontact">
+                <h2>Контакты</h2>
+                <p>Мы работаем с ПН-СБ:9.00:19:00</p>
+                <p>Кыргызстан,г.Бишкек,Тушинсий переулок, 2</p>
+                <a href="tel:+996880600700" class="foot__link phone"><img src="./assets/images/phone-svgrepo-com.svg"
+                        alt="">+996880600700</a>
+                <a href="" class="foot__link"><img src="./assets/images/svg_max.svg" alt=""> мы есть в Max</a>
+                <a href="mailto:Jyldyz.tasu@gmail.com" class="foot__link mail"><img
+                        src="./assets/images/mail-svgrepo-com.svg" alt="">Jyldyz.tasu@gmail.com</a>
+            </div>
+            <div class="navigation">
+                <ul>
+                    <li><strong>Навигация</strong></li>
+                    <li><a href="">О нас</a></li>
+                    <li><a href="">Наши услуги</a></li>
+                    <li><a href="">Каталог</a></li>
+                    <li><a href="">Наш блог</a></li>
+                </ul>
+            </div>
+            <button class="request__btn req__btn"><img src="./assets/images/contract-with-pen-svgrepo-com.svg"
+                    alt="">оставить заявку</button>
 
-    </div>
-    <div class="container footer__container">
-      <span>©2026 Ticlo. Все права защищены.</span>
-      <span>Медетбек кызы Жылдыз ИНН: 10809197600347</span>
-      <button id="user__click" class="user__btn contact"><img src="./assets/images/user.svg" alt="" /></button>
-    </div>
+        </div>
+        <div class="container footer__container">
+            <span>©2026 Ticlo. Все права защищены.</span>
+            <span>Медетбек кызы Жылдыз ИНН: 10809197600347</span>
+            <button id="user__click" class="user__btn contact"><img src="./assets/images/user.svg" alt="" /></button>
+        </div>
 
 
 
-  </footer>
+    </footer>
 
     <script type="module">
         async function loadFullPost() {
@@ -260,10 +260,11 @@
                     if (contentEl) contentEl.innerText = post.content;
 
                     if (post.image_name && imageEl) {
-                        imageEl.innerHTML = `<img class="ps-img" src="/uploads/${post.image_name}">`;
+                        imageEl.innerHTML = `<img class="ps-img" src="${post.image_name}">`;
                     } else if (imageEl) {
                         imageEl.innerHTML = "";
                     }
+
                 }
 
             } catch (error) {
