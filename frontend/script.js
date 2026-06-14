@@ -98,7 +98,6 @@ async function loadBlogs() {
 container.innerHTML = blogs.map(post => `
     <div class="blog-card">
         <h2 class="blog-id"> ${post.id}</h2> 
-        /* УБРАЛИ /uploads/, теперь выводится прямая ссылка из базы данных */
         ${post.image_name ? `<img src="${post.image_name}">` : ''}
         <div class="blog-card-content">
             <!-- Защищаем заголовок статьи -->
@@ -110,6 +109,7 @@ container.innerHTML = blogs.map(post => `
         </div>
     </div>
 `).join('');
+
 
 
 }
