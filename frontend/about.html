@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,21 @@
     <link rel="stylesheet" href="./assets/styles/index.css">
     <script src="./global.js" defer></script>
 </head>
+
 <body>
-      <header>
+    <header>
         <div class="container header__container">
-            <a href="#" class="header__logo"><img src="./assets/images/Group 5.svg" alt="" /></a>
+            <a href="index.html" class="header__logo"><img src="./assets/images/Group 5.svg" alt="" /></a>
             <nav>
                 <ul class="header__menu">
                     <li class="link">
                         <a href="index.html" class="header__item main">Главное</a>
                     </li>
-                    <li class="link"><a href="" class="header__item">О нас</a></li>
+                    <li class="link"><a href="about.html" class="header__item">О нас</a></li>
                     <li class="link">
-                        <a href="" class="header__item">Наши услуги</a>
+                        <a href="#third__section" class="header__item">Наши услуги</a>
                     </li>
-                    <li class="link"><a href="" class="header__item">Каталог</a></li>
+                    <li class="link"><a href="#swiper__section" class="header__item">Каталог</a></li>
                 </ul>
                 <div class="header__icons">
                     <a href="https://wa.me/996504956585" class="header__item "><img
@@ -135,315 +137,361 @@
 
     </form>
     <main>
-          <style>
-.factory-hero, .factory-info, .factory-advantages {
-    font-family: 'Montserrat', sans-serif;
-    color: #2b2b2b;
-    line-height: 1.7;
-    box-sizing: border-box;
-}
+        <style>
+            .factory-hero,
+            .factory-info,
+            .factory-advantages {
+                font-family: 'Montserrat', sans-serif;
+                color: #2b2b2b;
+                line-height: 1.7;
+                box-sizing: border-box;
+            }
 
-.about-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+            .about-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
 
-/* ================= БЛОК 1: БАННЕР ================= */
-.factory-hero {
-    position: relative;
-    height: 420px;
-    background-image: url('./assets/images/mashin1/201905221406366811s-1000x1000.webp');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+            /* ================= БЛОК 1: БАННЕР ================= */
+            .factory-hero {
+                position: relative;
+                height: 420px;
+                background-image: url('./assets/images/mashin1/201905221406366811s-1000x1000.webp');
+                background-size: cover;
+                background-position: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
 
-.factory-hero .hero-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(25, 25, 25, 0.75); /* Глубокий мягкий фильтр */
-    z-index: 1;
-}
+            .factory-hero .hero-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(25, 25, 25, 0.75);
+                /* Глубокий мягкий фильтр */
+                z-index: 1;
+            }
 
-.factory-hero .hero-inner {
-    position: relative;
-    z-index: 2;
-    color: #ffffff;
-    padding: 0 20px;
-}
+            .factory-hero .hero-inner {
+                position: relative;
+                z-index: 2;
+                color: #ffffff;
+                padding: 0 20px;
+            }
 
-.factory-hero .hero-inner h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin: 0 0 15px 0;
-    letter-spacing: 1px;
-}
+            .factory-hero .hero-inner h1 {
+                font-size: 2.8rem;
+                font-weight: 700;
+                margin: 0 0 15px 0;
+                letter-spacing: 1px;
+            }
 
-.factory-hero .hero-inner p {
-    font-size: 1.15rem;
-    font-weight: 300;
-    max-width: 650px;
-    margin: 0 auto;
-    color: #f0f0f0;
-}
+            .factory-hero .hero-inner p {
+                font-size: 1.15rem;
+                font-weight: 300;
+                max-width: 650px;
+                margin: 0 auto;
+                color: #f0f0f0;
+            }
 
-/* ================= БЛОК 2: ЖИВОЙ ТЕКСТ И КАРТИНКА ================= */
-.factory-info {
-    padding: 90px 0;
-    background-color: #faf9f6; /* Матовый льняной фон */
-}
+            /* ================= БЛОК 2: ЖИВОЙ ТЕКСТ И КАРТИНКА ================= */
+            .factory-info {
+                padding: 90px 0;
+                background-color: #faf9f6;
+                /* Матовый льняной фон */
+            }
 
-.factory-info .info-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr; /* Больше места под объемный текст */
-    gap: 60px;
-    align-items: start; /* Выравнивание по верху для длинных текстов */
-}
+            .factory-info .info-grid {
+                display: grid;
+                grid-template-columns: 1.3fr 1fr;
+                /* Больше места под объемный текст */
+                gap: 60px;
+                align-items: start;
+                /* Выравнивание по верху для длинных текстов */
+            }
 
-.factory-info .info-text .tag {
-    display: inline-block;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    color: #8c7864; /* Благородный кофейно-текстильный цвет */
-    font-weight: 600;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-}
+            .factory-info .info-text .tag {
+                display: inline-block;
+                font-size: 0.85rem;
+                text-transform: uppercase;
+                color: #8c7864;
+                /* Благородный кофейно-текстильный цвет */
+                font-weight: 600;
+                letter-spacing: 2px;
+                margin-bottom: 12px;
+            }
 
-.factory-info .info-text h2 {
-    font-size: 2.2rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin: 0 0 25px 0;
-    color: #1a1a1a;
-}
+            .factory-info .info-text h2 {
+                font-size: 2.2rem;
+                font-weight: 700;
+                line-height: 1.3;
+                margin: 0 0 25px 0;
+                color: #1a1a1a;
+            }
 
-.factory-info .info-text p {
-    font-size: 1.05rem;
-    color: #4a4a4a;
-    margin-bottom: 22px; /* Мягкие отступы между абзацами */
-}
+            .factory-info .info-text p {
+                font-size: 1.05rem;
+                color: #4a4a4a;
+                margin-bottom: 22px;
+                /* Мягкие отступы между абзацами */
+            }
 
-.factory-info .product-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 35px;
-}
+            .factory-info .product-tags {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                margin-top: 35px;
+            }
 
-.factory-info .p-tag {
-    background: #ffffff;
-    color: #333333;
-    padding: 9px 18px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    border-radius: 50px;
-    border: 1px solid #e3ded8;
-}
+            .factory-info .p-tag {
+                background: #ffffff;
+                color: #333333;
+                padding: 9px 18px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                border-radius: 50px;
+                border: 1px solid #e3ded8;
+            }
 
-.factory-info .info-image {
-    position: sticky; /* Картинка будет красиво удерживаться на экране при скролле текста */
-    top: 40px;
-}
+            .factory-info .info-image {
+                position: sticky;
+                /* Картинка будет красиво удерживаться на экране при скролле текста */
+                top: 40px;
+            }
 
-.factory-info .info-image img {
-    width: 100%;
-    height: 550px;
-    object-fit: cover;
-    border-radius: 4px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
-}
+            .factory-info .info-image img {
+                width: 100%;
+                height: 550px;
+                object-fit: cover;
+                border-radius: 4px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.03);
+            }
 
-/* ================= БЛОК 3: ПОДРОБНЫЕ ПРЕИМУЩЕСТВА ================= */
-.factory-advantages {
-    padding: 90px 0;
-    background-color: #ffffff;
-}
+            /* ================= БЛОК 3: ПОДРОБНЫЕ ПРЕИМУЩЕСТВА ================= */
+            .factory-advantages {
+                padding: 90px 0;
+                background-color: #ffffff;
+            }
 
-.factory-advantages h2 {
-    text-align: center;
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin: 0 0 55px 0;
-    color: #1a1a1a;
-}
+            .factory-advantages h2 {
+                text-align: center;
+                font-size: 2.2rem;
+                font-weight: 700;
+                margin: 0 0 55px 0;
+                color: #1a1a1a;
+            }
 
-.factory-advantages .advantages-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 35px;
-}
+            .factory-advantages .advantages-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 35px;
+            }
 
-.factory-advantages .adv-card {
-    padding: 35px 30px;
-    background: #faf9f6;
-    border-radius: 4px;
-    border-top: 4px solid #8c7864;
-    transition: transform 0.3s ease;
-}
+            .factory-advantages .adv-card {
+                padding: 35px 30px;
+                background: #faf9f6;
+                border-radius: 4px;
+                border-top: 4px solid #8c7864;
+                transition: transform 0.3s ease;
+            }
 
-.factory-advantages .adv-card:hover {
-    transform: translateY(-3px);
-}
+            .factory-advantages .adv-card:hover {
+                transform: translateY(-3px);
+            }
 
-.factory-advantages .adv-card h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin: 0 0 15px 0;
-    color: #1a1a1a;
-}
+            .factory-advantages .adv-card h3 {
+                font-size: 1.25rem;
+                font-weight: 600;
+                margin: 0 0 15px 0;
+                color: #1a1a1a;
+            }
 
-.factory-advantages .adv-card p {
-    color: #555555;
-    font-size: 0.98rem;
-    margin: 0;
-    line-height: 1.6;
-}
+            .factory-advantages .adv-card p {
+                color: #555555;
+                font-size: 0.98rem;
+                margin: 0;
+                line-height: 1.6;
+            }
 
-/* АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ */
-@media (max-width: 1024px) {
-    .factory-info .info-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    .factory-info .info-image {
-        position: static;
-    }
-    .factory-info .info-image img {
-        height: 380px;
-    }
-    .factory-advantages .advantages-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-}
+            /* АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ */
+            @media (max-width: 1024px) {
+                .factory-info .info-grid {
+                    grid-template-columns: 1fr;
+                    gap: 40px;
+                }
 
-@media (max-width: 576px) {
-    .factory-hero {
-        height: 320px;
-    }
-    .factory-hero .hero-inner h1 {
-        font-size: 2rem;
-    }
-    .factory-hero .hero-inner p {
-        font-size: 1rem;
-    }
-    .factory-info {
-        padding: 60px 0;
-    }
-    .factory-info .info-text h2, .factory-advantages h2 {
-        font-size: 1.75rem;
-    }
-    .factory-info .info-text p {
-        font-size: 1rem;
-    }
-}
+                .factory-info .info-image {
+                    position: static;
+                }
 
+                .factory-info .info-image img {
+                    height: 380px;
+                }
+
+                .factory-advantages .advantages-grid {
+                    grid-template-columns: 1fr;
+                    gap: 25px;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .factory-hero {
+                    height: 320px;
+                }
+
+                .factory-hero .hero-inner h1 {
+                    font-size: 2rem;
+                }
+
+                .factory-hero .hero-inner p {
+                    font-size: 1rem;
+                }
+
+                .factory-info {
+                    padding: 60px 0;
+                }
+
+                .factory-info .info-text h2,
+                .factory-advantages h2 {
+                    font-size: 1.75rem;
+                }
+
+                .factory-info .info-text p {
+                    font-size: 1rem;
+                }
+            }
         </style>
         <div class="factory-hero">
-    <div class="hero-overlay"></div>
-    <div class="hero-inner">
-        <h1>Швейная фабрика Ticlo</h1>
-        <p>Одежда, в которой комфортно жить, работать и любить. Создаем текстиль с заботой о каждом стежке.</p>
-    </div>
-</div>
+            <div class="hero-overlay"></div>
+            <div class="hero-inner">
+                <h1>Швейная фабрика Ticlo</h1>
+                <p>Одежда, в которой комфортно жить, работать и любить. Создаем текстиль с заботой о каждом стежке.</p>
+            </div>
+        </div>
 
-<div class="factory-info">
-    <div class="about-container">
-        <div class="info-grid">
-            <div class="info-text">
-                <span class="tag">Знакомство с нами</span>
-                <h2>История Ticlo: как рождается одежда, которую не хочется снимать</h2>
-                
-                <p>Мы открыли фабрику Ticlo в 2024 году,и уже много лет как производим одежду под собственным брендом и одежду наших партнеров. Наша цель заключаеться в том чтобы наши клиенты и клиенты наших заказчиков остались довольны качеством наших продукции.Доверие наших клиентов для нас на первом месте и мы всегда вкладываемся на полную чтобы было минимальное количество брака.Когда другие стремяться к количеству и к быстрому пошиву, мы в Ticlo сделали ставку на долговечность, идеальную посадку и безупречные швы, за которые никогда не будет стыдно перед покупателем.</p>
-                
-                <p>Каждое утро на нашей фабрике начинается с шума швейных машин, шелеста рулонов ткани и обсуждения новых лекал. Мы не работаем вслепую по готовым шаблонам из интернета. Наш собственный конструкторский отдел неделями дорабатывает миллиметры в чертежах, чтобы женские и мужские брюки палаццо не просто висели в гардеробе, а создавали тот самый летящий силуэт, подчеркивали талию и были удобными как в офисе, так и на вечерней прогулке.</p>
-                
-                <p>Мы любим сложные задачи. Будь то классические струящиеся брюки с идеальными защипами, базовые повседневные кофты или легкие романтичные сарафаны — к каждому изделию команда Ticlo относится как к искусству. Мы знаем, как капризен трикотаж при пошиве лонгсливов, поэтому используем специальные настройки оборудования, чтобы горловина и манжеты не растягивались после десятка стирок, а швы оставались мягкими и эластичными.</p>
-                
-                <p>Ticlo сегодня — это слаженная команда мастеров, любящих свое дело, современный цех и сотни тысяч вещей, которые прямо сейчас носят люди по всей стране. Мы шьем одежду полного цикла: от задумки дизайнера и подбора ниток до финальной глажки и упаковки готовой партии.</p>
+        <div class="factory-info">
+            <div class="about-container">
+                <div class="info-grid">
+                    <div class="info-text">
+                        <span class="tag">Знакомство с нами</span>
+                        <h2>История Ticlo: как рождается одежда, которую не хочется снимать</h2>
 
-                <!-- Наш фокус на ассортименте -->
-                <div class="product-tags">
-                    <span class="p-tag">Брюки Палаццо</span>
-                    <span class="p-tag">Мужские и Женские Лонгсливы</span>
-                    <span class="p-tag">Базовые Кофты</span>
-                    <span class="p-tag">Летние и Вечерние Сарафаны</span>
+                        <p>Мы открыли фабрику Ticlo в 2024 году,и уже много лет как производим одежду под собственным
+                            брендом и одежду наших партнеров. Наша цель заключаеться в том чтобы наши клиенты и клиенты
+                            наших заказчиков остались довольны качеством наших продукции.Доверие наших клиентов для нас
+                            на первом месте и мы всегда вкладываемся на полную чтобы было минимальное количество
+                            брака.Когда другие стремяться к количеству и к быстрому пошиву, мы в Ticlo сделали ставку на
+                            долговечность, идеальную посадку и безупречные швы, за которые никогда не будет стыдно перед
+                            покупателем.</p>
+
+                        <p>Каждое утро на нашей фабрике начинается с шума швейных машин, шелеста рулонов ткани и
+                            обсуждения новых лекал. Мы не работаем вслепую по готовым шаблонам из интернета. Наш
+                            собственный конструкторский отдел неделями дорабатывает миллиметры в чертежах, чтобы женские
+                            и мужские брюки палаццо не просто висели в гардеробе, а создавали тот самый летящий силуэт,
+                            подчеркивали талию и были удобными как в офисе, так и на вечерней прогулке.</p>
+
+                        <p>Мы любим сложные задачи. Будь то классические струящиеся брюки с идеальными защипами, базовые
+                            повседневные кофты или легкие романтичные сарафаны — к каждому изделию команда Ticlo
+                            относится как к искусству. Мы знаем, как капризен трикотаж при пошиве лонгсливов, поэтому
+                            используем специальные настройки оборудования, чтобы горловина и манжеты не растягивались
+                            после десятка стирок, а швы оставались мягкими и эластичными.</p>
+
+                        <p>Ticlo сегодня — это слаженная команда мастеров, любящих свое дело, современный цех и сотни
+                            тысяч вещей, которые прямо сейчас носят люди по всей стране. Мы шьем одежду полного цикла:
+                            от задумки дизайнера и подбора ниток до финальной глажки и упаковки готовой партии.</p>
+
+                        <!-- Наш фокус на ассортименте -->
+                        <div class="product-tags">
+                            <span class="p-tag">Брюки Палаццо</span>
+                            <span class="p-tag">Мужские и Женские Лонгсливы</span>
+                            <span class="p-tag">Базовые Кофты</span>
+                            <span class="p-tag">Летние и Вечерние Сарафаны</span>
+                        </div>
+                    </div>
+                    <div class="info-image">
+                        <img src="./assets/images/mashin1/1377e-0-1000x1000.jpg" alt="Швейный цех фабрики Ticlo">
+                    </div>
                 </div>
             </div>
-            <div class="info-image">
-                <img src="./assets/images/mashin1/1377e-0-1000x1000.jpg" alt="Швейный цех фабрики Ticlo">
+        </div>
+        <div class="factory-advantages">
+            <div class="about-container">
+                <h2>Что делает вещи от Ticlo особенными?</h2>
+                <div class="advantages-grid">
+
+                    <div class="adv-card">
+                        <h3>Анатомический крой и посадка</h3>
+                        <p>Вы замечали, как сложно найти брюки палаццо, которые не собираются складками там, где не
+                            нужно? Или лонгслив, который не жмет в плечах? В Ticlo мы тестируем каждое новое лекало на
+                            реальных людях разных типов фигур. Мы переделываем образцы до тех пор, пока одежда не начнет
+                            сидеть идеально, обеспечивая свободу движений.</p>
+                    </div>
+
+                    <div class="adv-card">
+                        <h3>Честный подбор материалов</h3>
+                        <p>Мы не экономим на качестве ниток и полотна. Если мы шьем кофты или сарафаны, то выбираем
+                            ткани, которые дышат, не покрываются катышками через неделю и сохраняют свой первоначальный
+                            цвет. Наши технологи лично проверяют каждую поступающую на склад партию текстиля на
+                            прочность и усадку.</p>
+                    </div>
+
+                    <div class="adv-card">
+                        <h3>Тройная проверка каждого шва</h3>
+                        <p>Ровные строчки — это наше лицо. На фабрике Ticlo действует строгая система контроля. Изделие
+                            не попадет в упаковку, если на нем будет хоть один пропущенный стежок или торчащая ниточка.
+                            Мы дорожим своей репутацией и доверием брендов, которые доверяют нам пошив своих коллекций.
+                        </p>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="factory-advantages">
-    <div class="about-container">
-        <h2>Что делает вещи от Ticlo особенными?</h2>
-        <div class="advantages-grid">
-            
-            <div class="adv-card">
-                <h3>Анатомический крой и посадка</h3>
-                <p>Вы замечали, как сложно найти брюки палаццо, которые не собираются складками там, где не нужно? Или лонгслив, который не жмет в плечах? В Ticlo мы тестируем каждое новое лекало на реальных людях разных типов фигур. Мы переделываем образцы до тех пор, пока одежда не начнет сидеть идеально, обеспечивая свободу движений.</p>
-            </div>
-            
-            <div class="adv-card">
-                <h3>Честный подбор материалов</h3>
-                <p>Мы не экономим на качестве ниток и полотна. Если мы шьем кофты или сарафаны, то выбираем ткани, которые дышат, не покрываются катышками через неделю и сохраняют свой первоначальный цвет. Наши технологи лично проверяют каждую поступающую на склад партию текстиля на прочность и усадку.</p>
-            </div>
-            
-            <div class="adv-card">
-                <h3>Тройная проверка каждого шва</h3>
-                <p>Ровные строчки — это наше лицо. На фабрике Ticlo действует строгая система контроля. Изделие не попадет в упаковку, если на нем будет хоть один пропущенный стежок или торчащая ниточка. Мы дорожим своей репутацией и доверием брендов, которые доверяют нам пошив своих коллекций.</p>
-            </div>
-            
-        </div>
-    </div>
-</div>
     </main>
-  <footer class="request">
-    <div class="request__container">
+    <footer class="request">
+        <div class="request__container">
 
-      <div class="ticlo__div">
-        <img src="./assets/images/Group 5.svg" alt="">
-        <p>Швейное производсто Ticlo специализируется на быстром и качественном пошиве партий любого объема</p>
-      </div>
-      <div class="kontact">
-        <h2>Контакты</h2>
-        <p>Мы работаем с ПН-СБ:9.00:19:00</p>
-        <p>Кыргызстан,г.Бишкек,Тушинсий переулок, 2</p>
-        <a href="tel:+996880600700" class="foot__link phone"><img src="./assets/images/phone-svgrepo-com.svg"
-            alt="">+996880600700</a>
-        <a href="" class="foot__link"><img src="./assets/images/svg_max.svg" alt=""> мы есть в Max</a>
-        <a href="mailto:Jyldyz.tasu@gmail.com" class="foot__link mail"><img src="./assets/images/mail-svgrepo-com.svg"
-            alt="">Jyldyz.tasu@gmail.com</a>
-      </div>
-      <div class="navigation">
-        <ul>
-          <li><strong>Навигация</strong></li>
-          <li><a href="">О нас</a></li>
-          <li><a href="">Наши услуги</a></li>
-          <li><a href="">Каталог</a></li>
-          <li><a href="">Наш блог</a></li>
-        </ul>
-      </div>
-      <button class="request__btn req__btn"><img
-          src="./assets/images/contract-with-pen-svgrepo-com.svg" alt="">оставить заявку</button>
+            <div class="ticlo__div">
+                <img src="./assets/images/Group 5.svg" alt="">
+                <p>Швейное производсто Ticlo специализируется на быстром и качественном пошиве партий любого объема</p>
+            </div>
+            <div class="kontact">
+                <h2>Контакты</h2>
+                <p>Мы работаем с ПН-СБ:9.00:19:00</p>
+                <p>Кыргызстан,г.Бишкек,Тушинсий переулок, 2</p>
+                <a href="tel:+996880600700" class="foot__link phone"><img src="./assets/images/phone-svgrepo-com.svg"
+                        alt="">+996880600700</a>
+                <a href="" class="foot__link"><img src="./assets/images/svg_max.svg" alt=""> мы есть в Max</a>
+                <a href="mailto:Jyldyz.tasu@gmail.com" class="foot__link mail"><img
+                        src="./assets/images/mail-svgrepo-com.svg" alt="">Jyldyz.tasu@gmail.com</a>
+            </div>
+            <div class="navigation">
+                <ul>
+                    <li><strong>Навигация</strong></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="#third__section">Наши услуги</a></li>
+                    <li><a href="#swiper__section">Каталог</a></li>
+                    <li><a href="#blog-container">Наш блог</a></li>
+                </ul>
+            </div>
+            <button class="request__btn req__btn"><img src="./assets/images/contract-with-pen-svgrepo-com.svg"
+                    alt="">оставить заявку</button>
 
-    </div>
-    <div class="container footer__container">
-      <span>©2026 Ticlo. Все права защищены.</span>
-      <span>Медетбек кызы Жылдыз ИНН: 10809197600347</span>
-      <button id="user__click" class="user__btn contact"><img src="./assets/images/user.svg" alt="" /></button>
-    </div>
+        </div>
+        <div class="container footer__container">
+            <span>©2026 Ticlo. Все права защищены.</span>
+            <span>Медетбек кызы Жылдыз ИНН: 10809197600347</span>
+            <button id="user__click" class="user__btn contact"><img src="./assets/images/user.svg" alt="" /></button>
+        </div>
 
 
 
-  </footer>
+    </footer>
 
 </body>
+
 </html>
