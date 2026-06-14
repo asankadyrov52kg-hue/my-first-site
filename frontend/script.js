@@ -73,7 +73,7 @@ questionsCard.forEach((item) => {
     })
 
   })
-});https://github.com/asankadyrov52kg-hue/my-first-site
+});
 
 //   ======================================blog===========================================================
 async function loadBlogs() {
