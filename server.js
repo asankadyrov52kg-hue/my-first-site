@@ -388,43 +388,6 @@ app.get('/api/admin/slider', async (req, res) => {
 
 
 
-// app.post('/api/admin/slider',checkAdmin, uploadSlider.single('slide'), async (req, res) => {
-//     try {
-//         if (!req.file) {
-//             return res.status(400).json({ error: 'Файл не загружен' });
-//         }
-
-//         const originalPath = req.file.path;
-
-//         const compressedName = 'compressed_' + path.parse(req.file.filename).name + '.webp';
-//         const compressedPath = path.join(path.dirname(originalPath), compressedName);
-
-//         await sharp(originalPath)
-//             .resize({ width: 1920, withoutEnlargement: true }) 
-//             .webp({
-//                 quality: 82,         
-//                 effort: 6,
-//                 smartSubsample: true
-//             })
-//             .toFile(compressedPath);
-
-//         setTimeout(() => {
-//             try {
-//                 if (fs.existsSync(originalPath)) fs.unlinkSync(originalPath);
-//             } catch (e) {
-//                 console.log("OneDrive занял файл, удалим позже:", e.message);
-//             }
-//         }, 100);
-
-//         const imageUrl = `/uploads/slider/${compressedName}`;
-//         await pool.query('INSERT INTO slider_images (image_url) VALUES ($1)', [imageUrl]);
-
-//         res.status(201).json({ success: true });
-//     } catch (err) {
-//         console.error("КРИТИЧЕСКАЯ ОШИБКА СЛАЙДЕРА:", err);
-//         res.status(500).json({ error: 'Ошибка сервера при обработке слайда' });
-//     }
-// });
 app.post('/api/admin/slider', checkAdmin, uploadSlider.single('slide'), async (req, res) => {
     try {
         if (!req.file) {

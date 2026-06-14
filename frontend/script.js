@@ -81,20 +81,6 @@ async function loadBlogs() {
   const blogs = await response.json();
   const container = document.getElementById('blog-container');
 
-//   container.innerHTML = blogs.map(post => `
-//     <div class="blog-card">
-//         <h2 class="blog-id"> ${post.id}</h2> 
-//         ${post.image_name ? `<img src="/uploads/${post.image_name}">` : ''}
-//         <div class="blog-card-content">
-//             <!-- Защищаем заголовок статьи -->
-//             <h3>${escapeHtml(post.title)}</h3>
-//             <small>${new Date(post.blog_date).toLocaleDateString()}</small>
-//             <!-- Защищаем описание статьи -->
-//             <p class="blog_desk">${escapeHtml(post.content.substring(0, 100))}...</p>
-//             <a href="blog.html?id=${post.id}" class="blog__btn">Читать далее</a>
-//         </div>
-//     </div>
-// `).join('');
 container.innerHTML = blogs.map(post => `
     <div class="blog-card">
         <h2 class="blog-id"> ${post.id}</h2> 

@@ -12,14 +12,10 @@
         (function() {
             const token = localStorage.getItem('adminToken');
             
-            // Жесткая и точная проверка: если токен действительно пустой, null или undefined
             if (token === null || token === undefined || token === '') {
-                // Только тогда выкидываем на логин
-                window.location.href = './login.html'; // Укажите точное имя файла входа
+                window.location.href = './login.html'; 
             }
             
-            // Если токен есть (не равен null), скрипт просто завершает работу 
-            // и страница спокойно загружается дальше!
         })();
     </script>
 
@@ -74,7 +70,6 @@
 
     
 
-    <!-- Форма изменения данных админа -->
     
 
     <script>
@@ -173,7 +168,7 @@ function escapeHtml(text) {
         .replace(/'/g, '&#039;');
 }
 
-// 2. Ваш обновленный код рендеринга карточек:
+
 container.innerHTML = blogs.map(post => `
     <div class="blog-card" id="blog-card-${post.id}">
         <h2 class="blog-id">${post.id}</h2> 
