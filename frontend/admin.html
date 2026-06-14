@@ -177,7 +177,8 @@ function escapeHtml(text) {
 container.innerHTML = blogs.map(post => `
     <div class="blog-card" id="blog-card-${post.id}">
         <h2 class="blog-id">${post.id}</h2> 
-        ${post.image_name ? `<img src="/uploads/${post.image_name}">` : ''}
+        /* Мы убрали префикс /uploads/, чтобы ссылка шла напрямую в Cloudinary */
+        ${post.image_name ? `<img src="${post.image_name}">` : ''}
         <div class="blog-card-content">
             <!-- Защищаем заголовок -->
             <h3>${escapeHtml(post.title)}</h3>
@@ -192,6 +193,7 @@ container.innerHTML = blogs.map(post => `
         </div>
     </div>
 `).join('');
+
  } catch (error) {
                 console.error('Ошибка при загрузке блогов:', error);
             }
