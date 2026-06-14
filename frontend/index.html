@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ticlo</title>
+  <link rel="stylesheet" href="./assets/styles/index.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+   <script src="./global.js" defer></script>
+  <script src="./script.js" defer></script>
+
+</head>
+
+<body>
+  <header class="hidden-section">
+    <div class="container header__container">
+      <a href="#" class="header__logo"><img src="./assets/images/Group 5.svg" alt="" /></a>
+      <nav>
+        <ul class="header__menu">
+          <li class="link">
+            <a href="" class="header__item main">Главное</a>
+          </li>
+          <li class="link"><a href="about.html" class="header__item">О нас</a></li>
+          <li class="link">
+            <a href="#third__section" class="header__item">Наши услуги</a>
+          </li>
+          <li class="link"><a href="#swiper__section" class="header__item">Каталог</a></li>
+        </ul>
+        <div class="header__icons">
+          <a href="https://wa.me/996880600700" class="header__item "><img src="./assets/images/whatsapp-svgrepo-com.svg"
+              alt="" />
+          </a>
+          <a href="#" class="header__item request__btn"><img src="./assets/images/google-forms-svgrepo-com.svg"
+              alt=""></a>
+          <a href="https://max.ru/u/f9LHodD0cOIG3_4_tuc_K39Nxn4zUVAE7YgMT13NGrWU9Ow8E7StAUIxtX4" class="header__item"><img src="./assets/images/svg_max.svg"
+              alt=""></a>
+        </div>
+
+        <input type="checkbox" class="burger" id="burger" hidden />
+        <label for="burger" class="burger__lbl">
+          <span class="line"></span>
+          <span class="line"></span>
+          <span class="line"></span>
+        </label>
+      </nav>
+    </div>
+  </header>
+  <label for="burger" class="burger__menu">
+    <ul class="burger__list">
+      <li class="link"><a href="" class="header__item main">Главное</a></li>
+      <li class="link"><a href="about.html" class="header__item">О нас</a></li>
+      <li class="link"><a href="" class="header__item">Наши услуги</a></li>
+      <li class="link"><a href="" class="header__item">Каталог</a></li>
+      <div class="burger__icons">
+        <a href="tel:+996880600700" class="header__item">
+          <img class="burger__watsupp" src="./assets/images/whatsapp-svgrepo-com.svg" alt="">
+        </a>
+         <a target="_blank" href="https://max.ru/u/f9LHodD0cOIG3_4_tuc_K39Nxn4zUVAE7YgMT13NGrWU9Ow8E7StAUIxtX4" class="header__item"><img src="./assets/images/svg_max.svg" alt=""></a>
+       <a href="" class="header__item request__btn"><img class="burger__form" src="./assets/images/google-forms-svgrepo-com.svg"
+              alt=""></a>
+      </div>
+    </ul>
+  </label>
+  <form id="loginForm">
+    <h2>Вход для админа</h2>
+    <input type="text" id="username" placeholder="Логин" required>
+    <input type="password" id="password" placeholder="Пароль" required>
+    <button type="submit" id="btn">Войти</button>
+    <img class="blog__svg contact" src="./assets/images/no-svgrepo-com.svg" alt="">
+  </form>
+  <form id="secend__form">
+    <h1>Оставить заявку</h1>
+    <input type="text" id="user_name" placeholder="Введите ваше имя" required />
+    <input type="email" id="email" placeholder="Введите email" required />
+    <input type="text" id="phone" placeholder="Введите номер" required />
+    <textarea oninput="autoHeight(this)" name="comment" id="user_request" placeholder="Ваш запрос"></textarea>
+    <div class="chek__ok">
+      <input type="checkbox" id="privacy" name="privacy" required>
+      <label for="privacy">
+        Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с <a href="blog.html?page=privacy"
+         rel="noopener noreferrer" class="privacy__link">политикой конфиденциальности</a>
+      </label>
+    </div>
+    <div class="form__but">
+      <button id="secend_btn" type="submit">
+        Отправить
+      </button>
+      <img src="./assets/images/no-svgrepo-com.svg" alt="" class="request__btn svg__req">
+    </div>
+
+  </form>
+  <main>
+    <section class="hero__media hidden-section">
+      <video autoplay loop muted playsinline class="video blur">
+        <source src="./assets/images/tic2 - Trim - Trim.mp4" type="video/mp4">
+      </video>
+      <div class="logo-mask">
+        <video class="video-content" autoplay muted loop playsinline>
+          <source src="./assets/images/tic2 - Trim - Trim.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="hero__content">
+        <h1 class="hero__title">Швейна фабрика полного цикла</h2>
+          <p class="hero__desk">Наша швейная фабрика специализируеться в пошиве женской одежды, в частности брюк. <br>
+            -Производим продукцию под ключ-от идеи до конечного продукта <br>
+            -отвечаем за качество <br>
+            -Работаем с любыми задачами и обьемами <br>
+            -нашими клиентами являються как большие бренды так и индивидуальные предприниматели которые реализуют
+            продажи
+            на маркетплейсах
+          </p>
+          <div class="hero__buttons">
+            <button class="hero__btn"><a href="tel:+996880600700">Связаться с нами <img src="./assets/images/phone-svgrepo-com.svg" alt=""></a></button>
+            <button class="hero__btn2 request__btn">Оставить заявку</button>
+
+
+          </div>
+      </div>
+
+
+
+
+    </section>
+    <section class="about hidden-section">
+      <div class="container about__container">
+        <div class="about__img">
+          <div class="el element1"><img src="./assets/images/mashin1/1377e-0-1000x1000.jpg" alt=""></div>
+          <div class="el element2"><img src="./assets/images/mashin1/201905221406366811s-1000x1000.webp" alt=""></div>
+          <div class="el element3"><img src="./assets/images/mashin1/320015_1 (4).jpg" alt=""></div>
+          <div class="el element4"><img src="./assets/images/mashin1/IMG_20211214_092617.jpg" alt=""></div>
+        </div>
+        <div class="about__line"></div>
+        <div class="about__card">
+          <h2 class="about__title">О нас</h2>
+          <p class="about__desk">Швейная фабрика Ticlo: шьем быстро, качественно и точно в срок. Берем на себя всю рутину
+            производства, чтобы вы могли сосредоточиться на творчестве и продажах. Современное оборудование, опытные
+            мастера и любовь к своему делу — всё, что нужно для создания идеальной коллекции.Выпускаем одежду под
+            собственным брендом и принимаем крупные заказы на пошив и аутсорсинг.
+          </p>
+          <button class="about__btn"><a href="about.html">Подробнее</a></button>
+        </div>
+    </section>
+    <section id="secend" class="secend hidden-section">
+      <div class="container secend__container">
+        <h2 class="secend__title">Почему стоит выбрать нас?</h1>
+          <div class="secend__card ">
+            <div class="secend__info top__first">
+              <span>У нас все прозрачно и по белому</span>
+              <p class="secend__text">
+                Мы полностью соответствуем требованиям обязательной цифровой маркировки, включая систему
+                «Честный знак»
+              </p>
+              <?xml version="1.0" encoding="utf-8"?>
+              <svg width="800px" height="800px" viewBox="0 0 1024 1024" class="sign__icon" version="1.1"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M569.9 921.1H228V139h97.2c8.5 17.7 26.5 29.9 47.3 29.9h279.1c20.8 0 38.9-12.3 47.3-29.9h96.7v458.1c0 11 9 20 20 20s20-9 20-20V130.3c0-17.3-14.3-31.3-31.8-31.3H701.1c-7.2-20.3-26.7-35-49.5-35H372.5c-22.7 0-42.2 14.7-49.5 35H219.7c-17.5 0-31.8 14-31.8 31.3v799.6c0 17.3 14.3 31.3 31.8 31.3h350.2c11 0 20-9 20-20s-8.9-20.1-20-20.1z"
+                  fill="currentColor" />
+                <path
+                  d="M706.4 404.6c0-11-9-20-20-20H319.1c-5.4-5.3-12.8-8.6-21.1-8.6-16.6 0-30 13.4-30 30s13.4 30 30 30c9.5 0 18-4.4 23.5-11.4h364.9c11 0 20-9 20-20zM706.4 542.1c0-11-9-20-20-20H322.1c-5.5-7.4-14.2-12.1-24.1-12.1-16.6 0-30 13.4-30 30s13.4 30 30 30c7.8 0 14.9-3 20.3-7.9h368.1c11 0 20-9 20-20zM320.1 660.6h-0.9c-5.4-5.4-12.9-8.8-21.2-8.8-16.6 0-30 13.4-30 30s13.4 30 30 30c9.5 0 17.9-4.4 23.4-11.2h297.2c11 0 20-9 20-20s-9-20-20-20H320.1zM950.2 529.4c-9.8-5.1-21.9-1.3-27 8.5L729.1 911l-143.6-78.6c-9.6-5.3-21.9-1.7-27.1 7.9-5.3 9.6-1.7 21.9 7.9 27.1l162.1 88.8c9.6 5.3 21.9 1.7 27.1-7.9 0.9-1.7 1.6-3.5 2-5.3l201.2-386.5c5.1-9.8 1.3-22-8.5-27.1z"
+                  fill="currentColor" />
+                <path
+                  d="M723.8 335.1h-429c-14.8 0-26.8-12-26.8-26.8v-81.4c0-14.8 12-26.8 26.8-26.8h429c14.8 0 26.8 12 26.8 26.8v81.4c0 14.8-12 26.8-26.8 26.8z"
+                  fill="currentColor" />
+              </svg>
+            </div>
+            <div class="secend__info top__secend">
+              <span>Пошив от 500 единиц</span>
+              <p class="secend__text">
+                Минимальный заказ составляет 500 единиц на модель. При этом вы можете варьировать размеры и
+                цвета, что позволяет адаптировать коллекцию под потребности вашей аудитории без лишних затрат..
+              </p>
+              <?xml version="1.0" encoding="iso-8859-1"?>
+              <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+              <svg fill="currentColor" class="sign__icon" height="800px" width="800px" version="1.1" id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 212.314 212.314" xml:space="preserve">
+                <path d="M168.067,212.314h-55.475c-1.657,0-3-1.343-3-3V79.929l-7.87-0.021v129.406c0,1.657-1.343,3-3,3H44.248
+	c-1.657,0-3-1.343-3-3V23.089c0-4.119,2.104-7.757,5.292-9.895V3c0-1.657,1.343-3,3-3h114.495c1.657,0,3,1.343,3,3v11.166
+	c2.471,2.183,4.032,5.375,4.032,8.923v186.225C171.067,210.971,169.724,212.314,168.067,212.314z M115.592,206.314h49.475V49.476
+	h-1.653c-13.993,0-25.377-11.384-25.377-25.377v-6.915h-16.729v35.048c0,4.586-2.548,8.71-6.65,10.762l-5.499,2.75v8.185
+	l3.442,0.009c1.653,0.004,2.992,1.346,2.992,3V206.314z M47.248,206.314h48.475V76.9c0-0.797,0.317-1.561,0.882-2.124
+	c0.563-0.561,1.324-0.876,2.118-0.876c0.003,0,0.005,0,0.008,0l4.428,0.012V17.184h-28.88v6.915
+	c0,13.993-11.384,25.377-25.377,25.377h-1.653V206.314z M109.158,17.184v41.851l2.815-1.408c2.057-1.029,3.334-3.096,3.334-5.396
+	V17.184H109.158z M144.037,17.184v6.915c0,10.685,8.692,19.377,19.377,19.377h1.653V23.089c0-3.256-2.649-5.905-5.905-5.905H144.037
+	z M47.248,43.476h1.653c10.685,0,19.377-8.692,19.377-19.377v-6.915H53.153c-3.256,0-5.905,2.649-5.905,5.905V43.476z
+	 M141.037,11.184h19.998V6H52.54v5.184H141.037z" />
+              </svg>
+
+            </div>
+            <div class="secend__info top__third">
+              <span>Оперативная и своевременная выполнения заказа</span>
+              <p class="secend__text">Наши швеи не только дают высокое качество продукции,но так же укладываються
+                в любые сроки .</p>
+              <?xml version="1.0" encoding="utf-8"?>
+              <svg fill="currentColor" width="120px" height="130px" viewBox="0 0 24 24" id="Layer_1" class=""
+                data-name="Layer 1" xmlns="http://www.w3.org/2000/svg">
+                <path d="M23,11a1,1,0,0,0-1,1,10.034,10.034,0,1,1-2.9-7.021A.862.862,0,0,1,19,5H16a1,1,0,0,0,0,2h3a3,3,0,0,0,3-3V1a1,1,0,0,0-2,0V3.065A11.994,11.994,0,1,0,24,12,1,1,0,0,0,23,11Z
+M12,6a1,1,0,0,0-1,1v5a1,1,0,0,0,.293.707l3,3a1,1,0,0,0,1.414-1.414L13,11.586V7A1,1,0,0,0,12,6Z" />
+              </svg>
+            </div>
+            <div class="secend__info bottom__first">
+              <span>Хорошие отзывы</span>
+              <p class="secend__text">
+                Все наши заказчики и покупатели остаються довольными нашими услугами и товарами, все отзывы и
+                оценки вы можете посмотреть нажимая по ссылке ниже
+              </p>
+              <?xml version="1.0" encoding="utf-8"?>
+              <svg width="800px" height="800px" viewBox="0 0 1024 1024" class="sign__icon" version="1.1"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M192 938.7H87.9c-48.4 0-87.9-39.5-87.9-88V386.6c0-48.5 39.5-87.9 87.9-87.9h125.4c11.6 0 22.7 4.7 30.8 13.1 8 8.4 12.3 19.6 11.9 31.2l-21.3 554.7c-0.9 22.8-19.8 41-42.7 41zM87.9 384c-1.4 0-2.6 1.2-2.6 2.6v464.1c0 1.4 1.2 2.6 2.6 2.6h63L169 384H87.9z"
+                  fill="currentColor" />
+                <path
+                  d="M810.4 938.7H275.7l24.6-640H418l72-201.8C510.7 38.9 566 0 627.5 0c42.4 0 82.6 18.4 110.3 50.4S778 124.8 772 166.7l-18.9 132h142.6c70.7 0 128.2 57.5 128.2 128.2l-1 9.3-84.4 379.4c-2.6 68.3-59.1 123.1-128.1 123.1z m-446.1-85.4h446.1c23.6 0 42.9-19.2 42.9-42.9l1-9.3L938.5 423c-2-21.8-20.4-39-42.7-39h-241l32.8-229.4c2.5-17.7-2.5-34.8-14.2-48.3s-28-20.9-45.9-20.9c-25.6 0-48.5 16.2-57.1 40.3L478.1 384h-95.7l-18.1 469.3z"
+                  fill="currentColor" />
+              </svg>
+            </div>
+            <div class="secend__info bottom__secend">
+              <span>Современные обородувание</span>
+              <p class="third__text">Наш цех оснащен всеми нужными специальными машинками и обородуваниями для
+                качественного и масштабного шитья</p>
+              <?xml version="1.0" encoding="utf-8"?>
+              <svg version="1.1" id="Слой_1" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" enable-background="new 0 0 64 64"
+                xml:space="preserve" class="sign__icon">
+                <rect id="bg" x="-426" y="-55" display="none" fill="#6DCFF6" width="544" height="455" />
+                <g id="Sewing_machine">
+                  <path d="M55,5h-9c0-2.4-1.6-4-4-4h-2c-2.3,0-4,1.7-4,4H10c-4.2,0-8,3.8-8,8v9c0,4.2,3.8,8,8,8H9v5c0,1.4,1.1,2.6,2.4,2.6
+		c1.4,0,2.6-1.1,2.6-2.6v-5h-1c4.2,0,8-3.8,8-8v-1h18v22H8.9C4.7,43,1,46.8,1,51v4c0,4.2,3.8,8,8,8h46c4.2,0,8-3.8,8-8V13
+		C63,8.8,59.2,5,55,5z M40,3h2c1.3,0,2,0.7,2,2h-6C38,3.8,38.8,3,40,3z M12,35c0,0.3-0.3,0.6-0.6,0.6C11,35.6,11,35.1,11,35v-5h1V35
+		z M61,55c0,3.1-2.9,6-6,6H9c-3.1,0-6-2.9-6-6v-4c0-3.1,2.8-6,5.9-6H39c1.1,0,2-0.9,2-2V21c0-1.1-0.9-2-2-2H21c-1.1,0-2,0.9-2,2v1
+		c0,3.1-2.9,6-6,6h-3c-3.1,0-6-2.9-6-6v-9c0-3.1,2.9-6,6-6h45c3.1,0,6,2.9,6,6V55z" />
+                  <path d="M51,28c-2.2,0-4,1.8-4,4c0,2.2,1.8,4,4,4c2.2,0,4-1.8,4-4C55,29.8,53.2,28,51,28z M51,34c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2
+		c1.1,0,2,0.9,2,2C53,33.1,52.1,34,51,34z" />
+                  <path d="M51,23c2.2,0,4-1.8,4-4c0-2.2-1.8-4-4-4c-2.2,0-4,1.8-4,4C47,21.2,48.8,23,51,23z M51,17c1.1,0,2,0.9,2,2c0,1.1-0.9,2-2,2
+		c-1.1,0-2-0.9-2-2C49,17.9,49.9,17,51,17z" />
+                  <path d="M51,49H11c-0.6,0-1,0.4-1,1s0.4,1,1,1h40c0.6,0,1-0.4,1-1S51.6,49,51,49z" />
+                  <path d="M56,49h-1c-0.6,0-1,0.4-1,1s0.4,1,1,1h1c0.6,0,1-0.4,1-1S56.6,49,56,49z" />
+                </g>
+              </svg>
+            </div>
+            <div class="secend__info bottom__third"><span>Качество</span>
+              <p class="third__text">Контролируем качество от начала производство до отправки к заказчикам</p>
+              <?xml version="1.0" encoding="iso-8859-1"?>
+              <svg fill="currentColor" height="800px" width="800px" version="1.1" id="Layer_1" class="sign__icon"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 512.001 512.001" xml:space="preserve">
+                <g>
+                  <g>
+                    <g>
+                      <path d="M509.618,404.733l-85.514-148.121c-2.302-3.987-8.06-3.847-10.229,0.213c-24.796,46.415-68.181,78.769-118.101,90.055
+				c-3.825,0.865-5.7,5.207-3.74,8.603l75.727,131.163c7.476,12.949,26.64,11.149,31.661-2.842l23.488-65.441l68.417,12.37
+				C505.976,433.379,517.065,417.632,509.618,404.733z" />
+                      <path d="M216.227,346.881c-49.937-11.291-93.316-43.662-118.101-90.055c-2.169-4.061-7.927-4.2-10.229-0.214L2.382,404.733
+				c-7.441,12.888,3.632,28.647,18.289,26l68.417-12.37l23.488,65.441c5.021,13.986,24.184,15.794,31.661,2.842l75.727-131.163
+				C221.926,352.086,220.052,347.745,216.227,346.881z" />
+                      <path
+                        d="M400.821,229.56v-0.001c18.976-47.929,12.966-102.055-16.077-144.789C322.965-6.137,189.025-6.112,127.267,84.761
+				c-29.048,42.743-35.063,96.872-16.088,144.799C163.147,360.791,349.099,360.177,400.821,229.56z M341.591,168.333l-30.086,29.325
+				l7.102,41.409c2.47,14.403-12.702,25.159-25.42,18.469L256,237.986l-37.188,19.551c-12.825,6.743-27.871-4.177-25.42-18.469
+				l7.102-41.409l-30.086-29.325c-10.376-10.116-4.639-27.798,9.709-29.882l41.577-6.042l18.593-37.675
+				c6.413-12.996,25.004-13.003,31.421,0l18.593,37.675l41.577,6.042C346.221,140.534,351.973,158.212,341.591,168.333z" />
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+
+          </div>
+
+      </div>
+
+
+    </section>
+    <section id="third__section" class="third__section hidden-section">
+      <h2 class="third__title">Как мы работаем</h2>
+      <div class="container third__container">
+        <div class="third__top">
+          <div class="third first-card">
+            <img src="./assets/images/phone-signal-svgrepo-com.svg" alt="">
+            <h2 class="first__card-title">Заявка</h2>
+            <p class="first__card-desk">оставтье свой номер,и мы расчитаем стоимость</p>
+          </div>
+          <div class="icon__line">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+
+          <div class="third secend-card">
+            <img src="./assets/images/third__svg/contact-women-talking-svgrepo-com.svg" alt="">
+            <h2 class="first__card-title">Выяснения деталей</h2>
+            <p class="first__card-desk">выбираем материал,обьем партии,сроки</p>
+          </div>
+          <div class="icon__line step">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <div class="third step">
+            <img src="./assets/images/third__svg/ruler-pencil-svgrepo-com.svg" alt="">
+            <h2 class="first__card-title">Разработка образца</h2>
+            <p class="first__card-desk">Покажем вам готовый образец</p>
+          </div>
+          <div class="third step">
+            <img src="./assets/images/third__svg/contract-with-pen-svgrepo-com.svg" alt="">
+            <h2 class="first__card-title">Договор</h2>
+            <p class="first__card-desk">Оформляем договор,подписываем, и тд</p>
+          </div>
+          <div class="icon__line step delete_line">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <div class="third step">
+            <img src="./assets/images/third__svg/thread-material-svgrepo-com.svg" alt="">
+            <h2 class="first__card-title">Пошив партии</h2>
+            <p class="first__card-desk">Контроль на каждом этапе производства</p>
+          </div>
+          <div class="icon__line step">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+          <div class="third six-card">
+            <img src="./assets/images/third__svg/delivery-svgrepo-com.svg" alt="">
+            <h2 class="first__card-title">Доставка</h2>
+            <p class="first__card-desk">Удобным вам маршрутом</p>
+          </div>
+          <div class="icon__line none">
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+            <div class="item"></div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </section>
+    <section class="more hidden-section">
+      <div class="more__container">
+        <!-- <h2 class="more__big-title">Основное на что мы ореинтируемся это женские и мужские брюки,но также у нас есть опыт в производстве одежды первого и второго слоя</h2> -->
+        <div class="more__list">
+          <div class="more__card longslive">
+             <h3 class="more__title ">Лонгсливы</h3>
+          </div>
+          <div class="more__card kofta">
+             <h3 class="more__title ">Кофта</h3>
+          </div>
+          <div class="more__card sarafan">
+             <h3 class="more__title ">Сарафаны</h3>
+          </div>
+          <div class="more__card men">
+             <h3 class="more__title ">Мужские брюки</h3>
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </section>
+
+    <section id="swiper__section" class="swiper__section">
+      <h2 class="swiper__title">Наш каталог</h2>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper" id="swiper-container">
+
+
+
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+      <a class="wb__button" href="https://www.wildberries.ru/brands/304942184-ticlo">посмотреть на WB</a>
+    </section>
+    <section class="fidback hidden-section">
+      <div class="container fidback__container ">
+        <div class="swiper hero-slider">
+          <h2 class="fidback__text">Отзывы
+          </h2>
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="wb-review-card">
+                <div class="review-top">
+                  <div class="user-info">
+                    <span class="user-name">Олеся</span>
+                    <span class="review-date">30 апреля, 22:29</span>
+                  </div>
+                  <div class="stars">★★★★★</div>
+                </div>
+
+                <div class="item-params">
+                  Выкупили: шоколадно-коричневый, 44
+                </div>
+                <div class="review-body">
+                  <p><strong>Достоинство:</strong> Качество</p>
+                  <p><strong>Недостатки:</strong> Нет минусов</p>
+                  <p><strong>Комментарий:</strong> Очень понравились брюки. Давно такие искала. Ткань плотная, тяжёлая.
+                    На
+                    жару конечно не подойдёт, жарко будет. Сейчас на весну или осень самое то.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="wb-review-card">
+                <div class="review-top">
+                  <div class="user-info">
+                    <span class="user-name">Ксения</span>
+                    <span class="review-date">21 апреля, 14:12</span>
+                  </div>
+                  <div class="stars">★★★★★</div>
+                </div>
+
+                <div class="item-params">
+                  Выкупили: розовый, 46
+                </div>
+                <div class="review-body">
+                  <p><strong>Достоинство:</strong> отличные брюки</p>
+                  <p><strong>Недостатки:</strong> Нет</p>
+                  <p><strong>Комментарий:</strong> Сели отлично. Особенно на фигуре груша хорошо смотрятся. Если брать
+                    на
+                    размер больше, то вообще супер</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="wb-review-card">
+                <div class="review-top">
+                  <div class="user-info">
+                    <span class="user-name">Ирина</span>
+                    <span class="review-date">30 апреля, 20:38</span>
+                  </div>
+                  <div class="stars">★★★★★</div>
+                </div>
+
+                <div class="item-params">
+                  Выкупили: ярко-красный,50
+                </div>
+                <div class="review-body">
+                  <p><strong>Достоинство:</strong> Шикарные!</p>
+                  <p><strong>Недостатки:</strong> Нет минусов!</p>
+                  <p><strong>Комментарий:</strong> Мои любимые брюки, все отлично ткань, пошив, цвет!
+                    На
+                    жару конечно не подойдёт, жарко будет. Сейчас на весну или осень самое то.</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="wb-review-card">
+                <div class="review-top">
+                  <div class="user-info">
+                    <span class="user-name">Наталья</span>
+                    <span class="review-date">24 апреля, 06:24</span>
+                  </div>
+                  <div class="stars">★★★★★</div>
+                </div>
+
+                <div class="item-params">
+                  Выкупили: черный, 46
+                </div>
+                <div class="review-body">
+                  <p><strong>Достоинство:</strong> Ширина брюк отличная, в талии и по попе все аккуратно прилегает,
+                    нигде
+                    не топорщится. Материал хороший. Немного нам длинноваты, но это не критично, ростом не вышли🫢</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="wb-review-card">
+                <div class="review-top">
+                  <div class="user-info">
+                    <span class="user-name">Светлана</span>
+                    <span class="review-date">21 апреля, 10:26</span>
+                  </div>
+                  <div class="stars">★★★★★</div>
+                </div>
+
+                <div class="item-params">
+                  Выкупили: голубой, 44
+                </div>
+                <div class="review-body">
+                  <p><strong>Достоинство:</strong> Качество</p>
+                  <p><strong>Недостатки:</strong> Нет минусов</p>
+                  <p><strong>Комментарий:</strong> Отличные брюки,подошли идеально, я очень довольна! Быстрая доставка!
+                    Рекомендую продавца!</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="wb-review-card">
+                <div class="review-top">
+                  <div class="user-info">
+                    <span class="user-name">Elena</span>
+                    <span class="review-date">1 мая, 21:46</span>
+                  </div>
+                  <div class="stars">★★★★★</div>
+                </div>
+
+                <div class="item-params">
+                  Выкупили: ярко-красный, 50
+                </div>
+                <div class="review-body">
+                  <p><strong>Достоинство:</strong> Классные брючки, на рост 174 по полу, только с каблуком 👍 на свой
+                    размер 48,50, взяла 50, идеально сели, осталась довольна)))</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="wb-review-card">
+                <div class="review-top">
+                  <div class="user-info">
+                    <span class="user-name">Лида</span>
+                    <span class="review-date">18 апреля, 22:21</span>
+                  </div>
+                  <div class="stars">★★★★★</div>
+                </div>
+
+                <div class="item-params">
+                  Выкупили: черный,42
+                </div>
+                <div class="review-body">
+                  <p><strong>Достоинство:</strong> Все</p>
+                  <p><strong>Недостатки:</strong> Большемерки</p>
+                  <p><strong>Комментарий:</strong> Не мнутся, на параметры от68 об100 росто 170 сидят идеально, ношу
+                    постоянно на работу им сносу нет. Появилось пару зацепок, но они убираются внутрь и всё, как новые.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="wb-review-card">
+                <div class="review-top">
+                  <div class="user-info">
+                    <span class="user-name">Николь</span>
+                    <span class="review-date">18 апреля, 00:11</span>
+                  </div>
+                  <div class="stars">★★★★★</div>
+                </div>
+
+                <div class="item-params">
+                  Выкупили: черный,48
+                </div>
+                <div class="review-body">
+                  <p><strong>Достоинство:</strong> Идеальные брючки, хорошо скрывают недостатки, стройнчт и безумно
+                    красивые, на высокий рост, но это не проблема, ее я решила за мин 10. Спасибо огромное. Всем
+                    советую,
+                    берите, не пожалеете. Думаю взять в другом цвете еще</p>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="wb-review-card">
+                <div class="review-top">
+                  <div class="user-info">
+                    <span class="user-name">Марина</span>
+                    <span class="review-date">17 апреля, 16:30</span>
+                  </div>
+                  <div class="stars">★★★★★</div>
+                </div>
+
+                <div class="item-params">
+                  Выкупили: шоколадно-коричневый, 44
+                </div>
+                <div class="review-body">
+                  <p><strong>Достоинство:</strong> Хорошая ткань- струящаяся; хороший пошив, красивая модель!</p>
+                  <p><strong>Комментарий:</strong> Шикарные брюки!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <section class="questions hidden-section">
+      <div class="container questions__container">
+        <h2 class="questions__title">Часто задаваемые вопросы</h2>
+        <div class="questions__list">
+          <div class="question__card">
+            <div class="question__text">
+              <h3 class="question__head">Какие виды одежды вы производите?</h3>
+              <div class="question__acc">
+                <p class="question__desk">Мы производим женские одежды, такие как сарафаны,кофты,лонгсливы,но главное на
+                  что
+                  мы ореинтируемся -женские и мужские брюки</p>
+              </div>
+            </div>
+            <button class="question__btn"><span class="q__line"></span>
+              <span class="q__line"></button>
+          </div>
+          <div class="question__card">
+            <div class="question__text">
+              <h3 class="question__head">Какая производительность у вашего производства?</h3>
+              <div class="question__acc">
+                <p class="question__desk">Наша производственная мощь-8000ед в месяц,но готовы обсудить любой обЬем
+                  вашего
+                  заказа и подстроиться</p>
+              </div>
+            </div>
+            <button class="question__btn"><span class="q__line"></span>
+              <span class="q__line"></button>
+          </div>
+          <div class="question__card">
+            <div class="question__text">
+              <h3 class="question__head">Какие виды тканей вы используете?</h3>
+              <div class="question__acc">
+                <p class="question__desk">Мы используем широкий спектр качественных костюмных тканей такие как барби,ниндзя и т.д</p>
+              </div>
+            </div>
+            <button class="question__btn"><span class="q__line"></span>
+              <span class="q__line"></button>
+          </div>
+          <div class="question__card">
+            <div class="question__text">
+              <h3 class="question__head">Каковы условия доставки и оплаты?</h3>
+              <div class="question__acc">
+                <p class="question__desk">Условия доставки и оплаты обсуждаются индивидуально с каждым клиентом в
+                  зависимости от объема заказа и местоположения</p>
+              </div>
+            </div>
+            <button class="question__btn"><span class="q__line"></span>
+              <span class="q__line"></button>
+          </div>
+          <div class="question__card">
+            <div class="question__text">
+              <h3 class="question__head">С какими странами вы работаете?</h3>
+              <div class="question__acc">
+                <p class="question__desk">Мы часто работаем с заказчиками из России и стран СНГ</p>
+              </div>
+            </div>
+            <button class="question__btn"><span class="q__line"></span>
+              <span class="q__line"></button>
+          </div>
+          <div class="question__card">
+            <div class="question__text">
+              <h3 class="question__head">Сколько времени занимает, пошив партии?</h3>
+              <div class="question__acc">
+                <p class="question__desk">Это зависит от обьема заказа,трудности модели,но мы приложим максимум усилий чтобы закончить в сроки</p>
+              </div>
+            </div>
+            <button class="question__btn"><span class="q__line"></span>
+              <span class="q__line"></button>
+          </div>
+
+          <div class="question__card">
+            <div class="question__text">
+              <h3 class="question__head">Каковы ваши основные преимущества?</h3>
+              <div class="question__acc">
+                <p class="question__desk">Мы
+                  работаем под ключ,готовы взять отвественность за каждый этап производства,также у нас современные
+                  обородувание и машинки</p>
+              </div>
+            </div>
+            <button class="question__btn"><span class="q__line"></span>
+              <span class="q__line"></button>
+          </div>
+
+
+
+
+
+
+        </div>
+      </div>
+    </section>
+
+    <section class="blog hidden-section">
+      <h2 class="blog__title">Наш блог</h2>
+      <div id="blog-container" class="container blog-grid"></div>
+    </section>
+
+
+  </main>
+  <footer class="request hidden-section">
+    <div class="request__container">
+
+      <div class="ticlo__div">
+        <img src="./assets/images/Group 5.svg" alt="">
+        <p>Швейное производсто Ticlo специализируется на быстром и качественном пошиве партий любого объема</p>
+      </div>
+      <div class="kontact">
+        <h2>Контакты</h2>
+        <p>Мы работаем с ПН-СБ:9.00:19:00</p>
+        <p>Кыргызстан,г.Бишкек,Тушинсий переулок, 2</p>
+        <a href="tel:+996880600700" class="foot__link phone"><img src="./assets/images/phone-svgrepo-com.svg"
+            alt="">+996880600700</a>
+        <a href="" class="foot__link"><img src="./assets/images/svg_max.svg" alt=""> мы есть в Max</a>
+        <a href="mailto:Jyldyz.tasu@gmail.com" class="foot__link mail"><img src="./assets/images/mail-svgrepo-com.svg"
+            alt="">Jyldyz.tasu@gmail.com</a>
+      </div>
+      <div class="navigation">
+        <ul>
+          <li><strong>Навигация</strong></li>
+          <li><a href="">О нас</a></li>
+          <li><a href="">Наши услуги</a></li>
+          <li><a href="">Каталог</a></li>
+          <li><a href="">Наш блог</a></li>
+        </ul>
+      </div>
+      <button class="request__btn req__btn"><img
+          src="./assets/images/contract-with-pen-svgrepo-com.svg" alt="">оставить заявку</button>
+
+    </div>
+    <div class="container footer__container">
+      <span>©2026 Ticlo. Все права защищены.</span>
+      <span>Медетбек кызы Жылдыз ИНН: 10809197600347</span>
+      <button id="user__click" class="user__btn contact"><img src="./assets/images/user.svg" alt="" /></button>
+    </div>
+
+
+
+  </footer>
+
+
+
+
+</body>
+
+</html>

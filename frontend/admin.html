@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticlo</title>
+    <link rel="stylesheet" href="./styleAdmin.css">
+    <link rel="stylesheet" href="./assets/styles/style.css">
+     <script src="./global.js"></script>
+        <script>
+        (function() {
+            const token = localStorage.getItem('adminToken');
+            
+            // Жесткая и точная проверка: если токен действительно пустой, null или undefined
+            if (token === null || token === undefined || token === '') {
+                // Только тогда выкидываем на логин
+                window.location.href = './login.html'; // Укажите точное имя файла входа
+            }
+            
+            // Если токен есть (не равен null), скрипт просто завершает работу 
+            // и страница спокойно загружается дальше!
+        })();
+    </script>
+
+   
+</head>
+
+<body>
+    <form id="profileForm" onsubmit="event.preventDefault(); changeAdminProfile();">
+        <div>
+            <label for="admin-new-username">Новый логин:</label>
+            <input type="text" id="admin-new-username" placeholder="Оставьте пустым, если не хотите менять">
+        </div>
+        
+        <div>
+            <label for="admin-new-password">Новый пароль:</label>
+            <input type="password" id="admin-new-password" placeholder="Оставьте пустым, если не хотите менять">
+        </div>
+        
+        <button type="submit">Сохранить изменения</button>
+    </form>
+
+    <div class="container blog__down">
+        <h2>Данные для блога</h2>
+        <form id="blogForm">
+            <input type="file" accept="image/*" id="file" hidden>
+            <label for="file" class="lbl__inp">изображение</label>
+            <img id="preview" src="" alt="Предпросмотр"
+                style="max-width: 200px; display: none; margin: 10px 0; border-radius: 8px;">
+            <input type="number" id="blog__id">
+            <input type="text" placeholder="Главный заголовок для блога" id="blog__title">
+            <input type="date" placeholder="сегодняшняя дата" id="blog__date">
+            <textarea oninput="autoHeight(this)" placeholder="Введите текст..." id="blog__content"></textarea>
+            <button type="submit" id="blog__button">Опубликовать</button>
+        </form>
+
+        <div id="blog-container" class="blog-grid"></div>
+        <div class="down__container">
+            <h2 class="dow__title">Загрузка картин для вашего каталога</h2>
+            <div class="blog__box">
+                <img id="imagePreview" src="" alt="Предпросмотр"
+                    style="display: none; max-width: 300px; margin-top: 10px; border-radius: 5px;">
+                <input type="file" accept="image/*" id="fileInput" hidden>
+                <label for="fileInput" class="inp__lbl">Выберите файл</label>
+                <button onclick="addSlide()" id="down__btn">Загрузить новый слайд</button>
+            </div>
+
+            <div id="list"></div>
+        </div>
+
+    </div>
+    <div id="stats-admin-container"></div>
+
+    
+
+    <!-- Форма изменения данных админа -->
+    
+
+    <script>
+
+    // Функция изменения данных админа с передачей JWT-токена
+    async function changeAdminProfile() {
+        const usernameInput = document.getElementById('admin-new-username').value.trim();
+        const passwordInput = document.getElementById('admin-new-password').value.trim();
+
+        // Формируем объект (отправляем только то, что заполнил админ)
+        const dataToSend = {};
+        if (usernameInput) dataToSend.newUsername = usernameInput;
+        if (passwordInput) dataToSend.newPassword = passwordInput;
+
+        // Если ничего не заполнено
+        if (Object.keys(dataToSend).length === 0) {
+            if (window.AppNotifier) {
+                window.AppNotifier.show(400, 'Заполните хотя бы одно поле для обновления');
+            } else {
+                alert('Заполните хотя бы одно поле для обновления');
+            }
+            return;
+        }
+
+        try {
+            // Вытаскиваем токен, который сохранился в LocalStorage при логине
+            const token = localStorage.getItem('adminToken'); 
+
+            const response = await fetch(`${BASE_API_URL}/api/up-dte-prof20`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(dataToSend)
+            });
+
+            const result = await response.json();
+
+            // Выводим результат в ваш глобальный AppNotifier (если он подключен на сайте)
+            if (window.AppNotifier) {
+                window.AppNotifier.show(response.status, result.message);
+            } else {
+                alert(result.message);
+            }
+
+            if (result.success) {
+                // Очищаем поля формы после успешного сохранения
+                document.getElementById('admin-new-username').value = '';
+                document.getElementById('admin-new-password').value = '';
+            }
+        } catch (error) {
+            if (window.AppNotifier) {
+                window.AppNotifier.show(500, 'Сервер недоступен при попытке обновления профиля');
+            } else {
+                alert('Сервер недоступен');
+            }
+        }
+    }
+
+
+    </script>
+    
+
+
+
+
+
+
+    <script>
+
+        // =====================функция для подключению к панелю админа=====================================================
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'index.html';
+        }
+        // ===========================функция для текст ареа================================================
+        function autoHeight(element) {
+            element.style.height = "auto";
+            element.style.height = (element.scrollHeight) + "px";
+        }
+        // =================================blogs================================================================
+        async function loadBlogs() {
+            try {
+                const response = await fetch(`${BASE_API_URL}/get-blogs`);
+                const blogs = await response.json();
+                const container = document.getElementById('blog-container');
+                // 1. Добавьте эту функцию в самый верх вашего JS-файла (если её еще нет)
+function escapeHtml(text) {
+    if (!text) return '';
+    return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+// 2. Ваш обновленный код рендеринга карточек:
+container.innerHTML = blogs.map(post => `
+    <div class="blog-card" id="blog-card-${post.id}">
+        <h2 class="blog-id">${post.id}</h2> 
+        ${post.image_name ? `<img src="/uploads/${post.image_name}">` : ''}
+        <div class="blog-card-content">
+            <!-- Защищаем заголовок -->
+            <h3>${escapeHtml(post.title)}</h3>
+            <small>${new Date(post.blog_date).toLocaleDateString()}</small>
+            <!-- Защищаем текст описания -->
+            <p class="blog_desk">${escapeHtml(post.content.substring(0, 200))}...</p>
+            <div class="blog-card-actions">
+                <a href="blog.html?id=${post.id}" class="blog__btn">Читать далее</a>
+                <!-- Кнопка удаления теперь находится внутри каждой карточки -->
+                <button class="btn-delete-blog" data-id="${post.id}">Удалить</button>
+            </div>
+        </div>
+    </div>
+`).join('');
+ } catch (error) {
+                console.error('Ошибка при загрузке блогов:', error);
+            }
+        }
+
+        loadBlogs();
+
+        document.getElementById('blogForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData();
+            const fileInput = document.getElementById('file');
+
+            formData.append('image', fileInput.files[0]);
+            formData.append('id', document.getElementById('blog__id').value);
+            formData.append('title', document.getElementById('blog__title').value);
+            formData.append('date', document.getElementById('blog__date').value);
+            formData.append('content', document.getElementById('blog__content').value);
+
+            try {
+                 const token = localStorage.getItem('adminToken');
+                const response = await fetch(`${BASE_API_URL}/upload-blog`, {
+                    method: 'POST',
+                      headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    AppNotifier.show(200, 'Блог успешно сохранен!');
+                    document.getElementById('blogForm').reset();
+                    document.getElementById('preview').style.display = 'none';
+                    loadBlogs();
+                } else {
+                    AppNotifier.show(200, 'Ошибка при отправке');
+                }
+            } catch (error) {
+                AppNotifier.show('Не удалось связаться с сервером при сохранении');
+            }
+        });
+
+        document.getElementById('file').addEventListener('change', function () {
+            const preview = document.getElementById('preview');
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+
+        document.getElementById('blog-container').addEventListener('click', async (e) => {
+            if (e.target.classList.contains('btn-delete-blog')) {
+                const id = e.target.getAttribute('data-id');
+
+                if (!await confirm(`Точно удалить пост №${id}?`)) return;
+
+                try {
+                     const token = localStorage.getItem('adminToken');
+                    const response = await fetch(`${BASE_API_URL}/api/delete-post/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        alert(result.message);
+                        const cardToRemove = document.getElementById(`blog-card-${id}`);
+                        if (cardToRemove) {
+                            cardToRemove.remove();
+                        }
+                    } else {
+                        alert('Ошибка: ' + result.message);
+                    }
+                } catch (error) {
+                    alert('Сервер не отвечает при попытке удаления');
+                }
+            }
+        });
+        // ========================================slider==========================================================================
+
+        document.getElementById('fileInput').addEventListener('change', function () {
+            const preview = document.getElementById('imagePreview');
+            const file = this.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        async function addSlide() {
+            const fileInput = document.getElementById('fileInput');
+            if (!fileInput.files[0]) {
+                AppNotifier.show(200, "Файл не выбран!");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('slide', fileInput.files[0]);
+
+            console.log("Отправляю файл...");
+
+            try {
+                 const token = localStorage.getItem('adminToken');
+                const response = await fetch(`${BASE_API_URL}/api/admin/slider`, {
+                    method: 'POST',
+                    headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    console.log("Ответ от сервера получен!");
+                    location.reload();
+                } else {
+                    console.error("Сервер ответил ошибкой:", response.status);
+                }
+            } catch (error) {
+                console.error("Ошибка сети или fetch:", error);
+            }
+        }
+
+        async function loadSlides() {
+            try {
+                const res = await fetch(`${BASE_API_URL}/api/admin/slider`);
+                const data = await res.json();
+
+                const listContainer = document.getElementById('list');
+                if (!listContainer) return;
+            // Функция escapeHtml у вас уже должна быть вверху файла
+           listContainer.innerHTML = data.map(s => `
+    <div class="img__card">
+        <img src="${escapeHtml(s.image_url)}" width="150" style="display: block; margin-bottom: 5px;">
+        <!-- Переносим ID в data-атрибут, как в блогах -->
+        <button class="red__btn btn-delete-slide" data-id="${s.id}">Удалить</button>
+    </div>
+`).join('');
+
+      listContainer.addEventListener('click', (event) => {
+    // Проверяем, что кликнули именно по кнопке удаления слайда
+    if (event.target.classList.contains('btn-delete-slide')) {
+        const slideId = event.target.getAttribute('data-id');
+        
+        // Вызываем вашу функцию удаления, передавая туда ID
+        deleteSlide(slideId);
+    }
+});
+
+
+            } catch (err) {
+                console.error("Не удалось загрузить список:", err);
+            }
+        }
+
+        async function deleteSlide(id) {
+            if (!await confirm("Удалить это фото?")) return;
+
+            try {
+                 const token = localStorage.getItem('adminToken');
+                const res = await fetch(`${BASE_API_URL}/api/admin/slider/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+                });
+
+                if (res.ok) {
+                    loadSlides();
+                }
+            } catch (err) {
+                AppNotifier.show(200, "Ошибка при удалении");
+            }
+        }
+
+        loadSlides();
+        // =================================================status==================================================================
+        // Базовая функция для создания модального HTML-окна
+        function createCustomModal(message, isConfirm = false) {
+            return new Promise((resolve) => {
+                const overlay = document.createElement('div');
+                overlay.className = 'custom-modal-overlay';
+
+                overlay.innerHTML = `
+            <div class="custom-modal-card">
+                <div class="custom-modal-title">${isConfirm ? 'Подтверждение' : 'Уведомление'}</div>
+                <div class="custom-modal-text">${message}</div>
+                <div class="custom-modal-buttons">
+                    ${isConfirm ? `<button class="custom-modal-btn custom-modal-btn-cancel" id="custom-cancel-btn">Нет</button>` : ''}
+                    <button class="custom-modal-btn custom-modal-btn-ok" id="custom-ok-btn">Да</button>
+                </div>
+            </div>
+        `;
+
+                document.body.appendChild(overlay);
+                setTimeout(() => overlay.classList.add('active'), 10);
+
+                const close = (result) => {
+                    overlay.classList.remove('active');
+                    setTimeout(() => {
+                        overlay.remove();
+                        resolve(result);
+                    }, 200);
+                };
+
+                overlay.querySelector('#custom-ok-btn').addEventListener('click', () => close(true));
+                if (isConfirm) {
+                    overlay.querySelector('#custom-cancel-btn').addEventListener('click', () => close(false));
+                }
+                overlay.addEventListener('click', (e) => { if (e.target === overlay) close(false); });
+            });
+        }
+
+        // ПЕРЕХВАТЫВАЕМ СТАНДАРТНЫЙ ALERT
+        window.alert = function (message) {
+            createCustomModal(message, false);
+        };
+
+        // ПЕРЕХВАТЫВАЕМ СТАНДАРТНЫЙ CONFIRM
+        window.confirm = function (message) {
+            return createCustomModal(message, true);
+        };
+        // ==========================================================change=====================================================
+       
+
+
+
+    </script>
+
+</body>
+
+</html>

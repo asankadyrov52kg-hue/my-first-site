@@ -1,0 +1,32 @@
+node_modules
+.env
+
+Hostname
+An internal hostname used by your Render services.
+dpg-d8n7g4gk1i2s739daj00-a
+
+Port
+5432
+
+Database
+mydb_czyb
+
+Username
+myuser
+
+Password
+vRZaocVaSWbujEkpZJmbjMZIIPGURUn4
+
+
+Internal Database URL
+postgresql://myuser:vRZaocVaSWbujEkpZJmbjMZIIPGURUn4@dpg-d8n7g4gk1i2s739daj00-a/mydb_czyb
+
+
+External Database URL
+postgresql://myuser:vRZaocVaSWbujEkpZJmbjMZIIPGURUn4@dpg-d8n7g4gk1i2s739daj00-a.virginia-postgres.render.com/mydb_czyb
+
+
+PSQL Command
+PGPASSWORD=vRZaocVaSWbujEkpZJmbjMZIIPGURUn4 psql -h dpg-d8n7g4gk1i2s739daj00-a.virginia-postgres.render.com -U myuser mydb_czyb
+
+

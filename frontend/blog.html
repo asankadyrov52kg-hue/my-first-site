@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticlo</title>
+    <link rel="stylesheet" href="./assets/styles/index.css">
+    <link rel="stylesheet" href="./assets/styles/fonts.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+    <script src="./global.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="container header__container">
+            <a href="#" class="header__logo"><img src="./assets/images/Group 5.svg" alt="" /></a>
+            <nav>
+                <ul class="header__menu">
+                    <li class="link">
+                        <a href="" class="header__item main">Главное</a>
+                    </li>
+                    <li class="link"><a href="" class="header__item">О нас</a></li>
+                    <li class="link">
+                        <a href="" class="header__item">Наши услуги</a>
+                    </li>
+                    <li class="link"><a href="" class="header__item">Каталог</a></li>
+                </ul>
+                <div class="header__icons">
+                    <a href="https://wa.me/996504956585" class="header__item "><img
+                            src="./assets/images/whatsapp-svgrepo-com.svg" alt="" />
+                    </a>
+                    <a href="https://max.ru/u/f9LHodD0cOIG3_4_tuc_K39Nxn4zUVAE7YgMT13NGrWU9Ow8E7StAUIxtX4"
+                        class="header__item"><img src="./assets/images/svg_max.svg" alt=""></a>
+                    <a href="" class="header__item request__btn"><img src="./assets/images/google-forms-svgrepo-com.svg"
+                            alt=""></a>
+                </div>
+
+                <input type="checkbox" class="burger" id="burger" hidden />
+                <label for="burger" class="burger__lbl">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </label>
+            </nav>
+        </div>
+    </header>
+    <label for="burger" class="burger__menu">
+        <ul class="burger__list">
+            <li class="link"><a href="" class="header__item main">Главное</a></li>
+            <li class="link"><a href="" class="header__item">О нас</a></li>
+            <li class="link"><a href="" class="header__item">Наши услуги</a></li>
+            <li class="link"><a href="" class="header__item">Каталог</a></li>
+            <div class="burger__icons">
+                <a href="tel:+996880600700" class="header__item">
+                    <img class="burger__watsupp" src="./assets/images/whatsapp-svgrepo-com.svg" alt="">
+                </a>
+                <a target="_blank" href="https://max.ru/u/f9LHodD0cOIG3_4_tuc_K39Nxn4zUVAE7YgMT13NGrWU9Ow8E7StAUIxtX4"
+                    class="header__item"><img src="./assets/images/svg_max.svg" alt=""></a>
+                <a href="" class="header__item request__btn"><img class="burger__form"
+                        src="./assets/images/google-forms-svgrepo-com.svg" alt=""></a>
+            </div>
+        </ul>
+    </label>
+    <form id="loginForm">
+        <h2>Вход для админа</h2>
+        <input type="text" id="username" placeholder="Логин" required>
+        <input type="password" id="password" placeholder="Пароль" required>
+        <button type="submit" id="btn">Войти</button>
+        <img class="blog__svg contact" src="./assets/images/no-svgrepo-com.svg" alt="">
+    </form>
+    <form id="secend__form">
+        <h1>Оставить заявку</h1>
+        <input type="text" id="user_name" placeholder="Введите ваше имя" required />
+        <input type="email" id="email" placeholder="Введите email" required />
+        <input type="text" id="phone" placeholder="Введите номер" required />
+        <textarea oninput="autoHeight(this)" name="comment" id="user_request" placeholder="Ваш запрос"></textarea>
+        <div class="chek__ok">
+            <input type="checkbox" id="privacy" name="privacy" required>
+            <label for="privacy">
+                Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с <a
+                    href="./privacy.html" target="_blank" rel="noopener noreferrer" class="privacy__link">политикой
+                    конфиденциальности</a>
+            </label>
+        </div>
+        <div class="form__but">
+            <button id="secend_btn" type="submit">
+                Отправить
+            </button>
+            <img src="./assets/images/no-svgrepo-com.svg" alt="" class="request__btn svg__req">
+        </div>
+
+    </form>
+    <main class="container">
+        <style>
+            .post__container {
+                padding: 140px 20px 40px 20px;
+                display: flex;
+                gap: 30px;
+
+            }
+
+            #post-image {
+                max-width: 500px;
+                min-width: 200px;
+                height: 500px;
+                border-radius: 20px;
+                overflow: hidden;
+            }
+
+            .ps-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .post-text {
+                max-width: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            #post-content {
+                font-family: 'PT Root UI', Helvetica, Arial, sans-serif;
+                font-size: 20px;
+                font-weight: 400;
+            }
+
+            #post-title {
+                margin: 0 0 20px 0;
+                font-family: 'PT Root UI', Helvetica, Arial, sans-serif;
+                font-weight: 500;
+            }
+
+            #post-date {
+                font-size: 20px;
+                font-family: 'PT Root UI', Helvetica, Arial, sans-serif;
+                font-weight: 300;
+
+            }
+
+            @media(max-width:900px) {
+                #post-content {
+                    font-family: 'PT Root UI', Helvetica, Arial, sans-serif;
+                    font-size: 15px;
+                    font-weight: 400;
+                }
+
+                #post-title {
+                    margin: 0 0 20px 0;
+                    font-family: 'PT Root UI', Helvetica, Arial, sans-serif;
+                    font-weight: 400;
+                }
+
+                #post-date {
+                    font-size: 15px;
+                    font-family: 'PT Root UI', Helvetica, Arial, sans-serif;
+                    font-weight: 300;
+
+                }
+
+                @media(max-width:700px) {
+                    .post__container {
+                        flex-wrap: wrap;
+                        justify-content: center;
+                    }
+
+                }
+            }
+        </style>
+        <div class="post__container">
+            <div id="post-image"></div>
+            <div class="post-text">
+                <strong id="post-date"></strong>
+                <h1 id="post-title"></h1>
+                <p id="post-content"></p>
+            </div>
+        </div>
+
+    </main>
+
+  <footer class="request">
+    <div class="request__container">
+
+      <div class="ticlo__div">
+        <img src="./assets/images/Group 5.svg" alt="">
+        <p>Швейное производсто Ticlo специализируется на быстром и качественном пошиве партий любого объема</p>
+      </div>
+      <div class="kontact">
+        <h2>Контакты</h2>
+        <p>Мы работаем с ПН-СБ:9.00:19:00</p>
+        <p>Кыргызстан,г.Бишкек,Тушинсий переулок, 2</p>
+        <a href="tel:+996880600700" class="foot__link phone"><img src="./assets/images/phone-svgrepo-com.svg"
+            alt="">+996880600700</a>
+        <a href="" class="foot__link"><img src="./assets/images/svg_max.svg" alt=""> мы есть в Max</a>
+        <a href="mailto:Jyldyz.tasu@gmail.com" class="foot__link mail"><img src="./assets/images/mail-svgrepo-com.svg"
+            alt="">Jyldyz.tasu@gmail.com</a>
+      </div>
+      <div class="navigation">
+        <ul>
+          <li><strong>Навигация</strong></li>
+          <li><a href="">О нас</a></li>
+          <li><a href="">Наши услуги</a></li>
+          <li><a href="">Каталог</a></li>
+          <li><a href="">Наш блог</a></li>
+        </ul>
+      </div>
+      <button class="request__btn req__btn"><img
+          src="./assets/images/contract-with-pen-svgrepo-com.svg" alt="">оставить заявку</button>
+
+    </div>
+    <div class="container footer__container">
+      <span>©2026 Ticlo. Все права защищены.</span>
+      <span>Медетбек кызы Жылдыз ИНН: 10809197600347</span>
+      <button id="user__click" class="user__btn contact"><img src="./assets/images/user.svg" alt="" /></button>
+    </div>
+
+
+
+  </footer>
+
+    <script type="module">
+        async function loadFullPost() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+            const pageSlug = urlParams.get('page');
+
+            if (!postId && !pageSlug) return;
+
+            try {
+                const titleEl = document.getElementById('post-title');
+                const contentEl = document.getElementById('post-content');
+                const dateEl = document.getElementById('post-date');
+                const imageEl = document.getElementById('post-image');
+
+                if (pageSlug) {
+                    const response = await fetch(`${BASE_API_URL}/api/pages/${pageSlug}`);
+
+                    if (!response.ok) {
+                        console.error(`Ошибка сервера: статус ${response.status}`);
+                        return;
+                    }
+
+                    const pageData = await response.json();
+
+                    if (titleEl) titleEl.innerText = pageData.title || "";
+                    if (contentEl) contentEl.innerText = pageData.content || "";
+
+                    if (dateEl) dateEl.innerText = "";
+                    if (imageEl) imageEl.innerHTML = "";
+                    return;
+                }
+                if (postId) {
+                    const response = await fetch(`${BASE_API_URL}/get-blog/${postId}`);
+                    const post = await response.json();
+
+                    if (titleEl) titleEl.innerText = post.title;
+                    if (dateEl) dateEl.innerText = post.blog_date ? new Date(post.blog_date).toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' }) : "";
+                    if (contentEl) contentEl.innerText = post.content;
+
+                    if (post.image_name && imageEl) {
+                        imageEl.innerHTML = `<img class="ps-img" src="/uploads/${post.image_name}">`;
+                    } else if (imageEl) {
+                        imageEl.innerHTML = "";
+                    }
+                }
+
+            } catch (error) {
+                console.error("Произошла ошибка в JS:", error);
+            }
+        }
+
+        loadFullPost();
+
+    </script>
+</body>
+
+</html>
