@@ -109,52 +109,7 @@ const uploadSlider = multer({ storage: sliderStorage });
 // ======================================================================================
 
 
-// app.post('/upload-blog',checkAdmin, upload.single('image'), async (req, res) => {
-//     try {
-//         const { id, title, date, content } = req.body;
 
-//         let imageName = req.file ? req.file.filename : null;
-
-//         if (req.file) {
-//             const originalPath = req.file.path;
-//             const compressedName = 'compressed_' + req.file.filename;
-//             const compressedPath = path.join(path.dirname(originalPath), compressedName);
-
-//             await sharp(originalPath)
-//                 .resize({ width: 1200, withoutEnlargement: true })
-
-//                 .webp({
-//                     quality: 78,        
-//                     effort: 6,          
-//                     smartSubsample: true
-//                 })
-//                 .toFile(compressedPath);
-
-
-//             setTimeout(() => {
-//                 try {
-//                     if (fs.existsSync(originalPath)) fs.unlinkSync(originalPath);
-//                 } catch (e) {
-//                     console.log("OneDrive заблокировал оригинал, удалим позже:", e.message);
-//                 }
-//             }, 100);
-
-//             imageName = compressedName;
-//         }
-
-//         const sql = `
-//             INSERT INTO blogs (id, title, blog_date, content, image_name) 
-//             VALUES ($1, $2, $3, $4, $5) RETURNING *`;
-
-//         const values = [id, title, date, content, imageName];
-//         const result = await pool.query(sql, values);
-
-//         res.json({ status: 'ok', data: result.rows[0] });
-//     } catch (err) {
-//         console.error("ОШИБКА ОБРАБОТКИ:", err);
-//         res.status(500).json({ error: 'Ошибка при записи в БД или сжатии' });
-//     }
-// });
 
 app.post('/upload-blog', checkAdmin, upload.single('image'), async (req, res) => {
     try {
