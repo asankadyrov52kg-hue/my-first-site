@@ -425,9 +425,40 @@ app.post('/api/admin/slider', checkAdmin, uploadSlider.single('slide'), async (r
 // ===================================================================================================
 
 
-app.delete('/api/admin/slider/:id',checkAdmin,adminActionLimiter, async (req, res) => {
+// Вспомогательная функция для извлечения Public ID слайда из ссылки Cloudinary
+function getSliderPublicId(url) {
+    if (!url) return null;
+    try {
+        // Проверяем, в какую папку загружаются слайды. 
+        // Если они загружаются в папку 'slider_images', то делим по ней:
+        if (url.includes('/slider_images/')) {
+            const parts = url.split('/slider_images/');
+            const filename = parts[1].split('.')[0];
+            return `slider_images/${filename}`;
+        }
+        
+        // Если папки нет и файлы загружаются в корень Cloudinary:
+        const parts = url.split('/upload/');
+        if (parts.length < 2) return null;
+        
+        // Пропускаем строку версии (например, v12345678/)
+        const pathParts = parts[1].split('/');
+        // Берем самый последний элемент (имя файла) и отрезаем расширение
+        const filenameWithExt = pathParts[pathParts.length - 1];
+        const filename = filenameWithExt.split('.')[0];
+        
+        return filename;
+    } catch (e) {
+        console.error("Ошибка парсинга ссылки слайда Cloudinary:", e);
+        return null;
+    }
+}
+
+app.delete('/api/admin/slider/:id', checkAdmin, adminActionLimiter, async (req, res) => {
     try {
         const { id } = req.params;
+        
+        // 1. Удаляем слайд из БД и возвращаем ссылку image_url
         const result = await pool.query(
             'DELETE FROM slider_images WHERE id = $1 RETURNING image_url',
             [id]
@@ -440,25 +471,30 @@ app.delete('/api/admin/slider/:id',checkAdmin,adminActionLimiter, async (req, re
         const imageUrl = result.rows[0].image_url;
 
         if (imageUrl) {
-            const cleanPath = imageUrl.startsWith('/') ? imageUrl.slice(1) : imageUrl;
+            const publicId = getSliderPublicId(imageUrl);
 
-            const filePath = path.join(process.cwd(), cleanPath);
-            if (fs.existsSync(filePath)) {
+            if (publicId) {
                 try {
-                    fs.unlinkSync(filePath);
-                    console.log(`✓ Слайд ${imageUrl} успешно удален с диска`);
-                } catch (fileErr) {
-                    console.error(`Не удалось стереть файл (возможно, занят OneDrive): ${fileErr.message}`);
+                    const cloudinaryResponse = await cloudinary.uploader.destroy(publicId);
+                    
+                    if (cloudinaryResponse.result === 'ok') {
+                        console.log(`✓ Слайд ${publicId} успешно удален из Cloudinary`);
+                    } else {
+                        console.log(`⚠️ Робот Cloudinary вернул: ${cloudinaryResponse.result} (возможно, файл уже удален вручную)`);
+                    }
+                } catch (cloudErr) {
+                    console.error(`Не удалось стереть файл из Cloudinary: ${cloudErr.message}`);
                 }
             }
         }
 
-        res.json({ success: true, message: 'Слайд успешно удален из БД и с диска' });
+        res.json({ success: true, message: 'Слайд успешно удален из БД и из облака Cloudinary' });
     } catch (err) {
         console.error("ОШИБКА УДАЛЕНИЯ СЛАЙДЕРА:", err);
         res.status(500).json({ error: 'Ошибка сервера при удалении слайда' });
     }
 });
+
 
 // =====================================request===============================================================================================================\
 

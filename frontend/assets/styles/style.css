@@ -1140,6 +1140,30 @@ span {
   border-radius: 10px;
 }
 
+.blog-wrapper {
+  max-height: 480px;
+  overflow: hidden;
+  position: relative;
+  transition: max-height 0.5s ease-in-out; 
+}
+
+.blog-wrapper.expanded {
+  max-height: 10000px; 
+}
+
+/* Кнопка "Показать ещё" */
+.show-more-btn {
+  display: none;
+  margin: 20px auto;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 #loginForm.active1 {
   top: 150px;
 }

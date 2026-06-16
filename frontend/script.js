@@ -81,24 +81,62 @@ async function loadBlogs() {
   const blogs = await response.json();
   const container = document.getElementById('blog-container');
 
-container.innerHTML = blogs.map(post => `
+  container.innerHTML = blogs.map(post => `
     <div class="blog-card">
         <h2 class="blog-id"> ${post.id}</h2> 
         ${post.image_name ? `<img src="${post.image_name}">` : ''}
         <div class="blog-card-content">
-            <!-- Защищаем заголовок статьи -->
             <h3>${escapeHtml(post.title)}</h3>
             <small>${new Date(post.blog_date).toLocaleDateString()}</small>
-            <!-- Защищаем описание статьи -->
             <p class="blog_desk">${escapeHtml(post.content.substring(0, 100))}...</p>
             <a href="blog.html?id=${post.id}" class="blog__btn">Читать далее</a>
         </div>
     </div>
-`).join('');
+  `).join('');
 
-
-
+  // 🔥 Вызываем проверку высоты СРАЗУ после отрисовки карточек блогов!
+  checkBlogsHeight();
 }
+
+// Функция, которая проверяет, вылезли ли блоги за пределы экрана
+function checkBlogsHeight() {
+  const wrapper = document.getElementById('blogWrapper');
+  const btn = document.getElementById('showMoreBtn');
+  
+  // Убираем класс раскрытия перед замером
+  wrapper.classList.remove('expanded');
+
+  // Небольшая задержка, чтобы картинки из Cloudinary успели занять место в DOM
+  setTimeout(() => {
+    if (wrapper.scrollHeight > wrapper.clientHeight) {
+      btn.style.display = 'block'; // Блогов много — показываем кнопку
+    } else {
+      btn.style.display = 'none';  // Блогов мало — прячем кнопку
+    }
+  }, 150);
+}
+
+// Функция работы кнопки "Показать ещё"
+function toggleBlogs() {
+  const wrapper = document.getElementById('blogWrapper');
+  const btn = document.getElementById('showMoreBtn');
+  
+  wrapper.classList.toggle('expanded');
+  
+  if (wrapper.classList.contains('expanded')) {
+    btn.textContent = 'Свернуть';
+  } else {
+    btn.textContent = 'Показать ещё';
+    // Плавно возвращаем к началу блогов при сворачивании
+    wrapper.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// Пересчитываем высоту, если пользователь изменил размер окна браузера
+window.addEventListener('resize', checkBlogsHeight);
+
+loadBlogs();
+
 
 loadBlogs();
 // ============================================window-show======================================================================
