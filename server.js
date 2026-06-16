@@ -300,10 +300,33 @@ app.get('/get-blog/:id', async (req, res) => {
 
 // ===============================delete=============================================================
 
-app.delete('/api/delete-post/:id',checkAdmin,adminActionLimiter, async (req, res) => {
+// Вспомогательная функция для извлечения Public ID из полной ссылки Cloudinary
+// (Разместите её где-нибудь вверху вашего файла с кодом)
+function getCloudinaryPublicId(url) {
+    if (!url) return null;
+    try {
+        // Ищет начало папки 'blogs_images' в ссылке
+        const parts = url.split('/blogs_images/');
+        if (parts.length < 2) return null;
+        
+        // Берет всё, что после 'blogs_images/' (например: 'image.webp' или 'abc123xyz.webp')
+        const filenameWithExtension = parts[1];
+        // Отрезает расширение файла (.webp, .jpg и т.д.)
+        const publicIdWithoutExt = filenameWithExtension.split('.')[0];
+        
+        // Возвращает полный путь файла в облаке: 'blogs_images/имя_файла'
+        return `blogs_images/${publicIdWithoutExt}`;
+    } catch (e) {
+        console.error("Ошибка парсинга ссылки Cloudinary:", e);
+        return null;
+    }
+}
+
+app.delete('/api/delete-post/:id', checkAdmin, adminActionLimiter, async (req, res) => {
     const { id } = req.params;
 
     try {
+        // 1. Удаляем блог и возвращаем полную ссылку на картинку, которая лежала в image_name
         const result = await pool.query(
             'DELETE FROM blogs WHERE id = $1 RETURNING image_name',
             [id]
@@ -313,23 +336,31 @@ app.delete('/api/delete-post/:id',checkAdmin,adminActionLimiter, async (req, res
             return res.status(404).json({ success: false, message: 'Пост с таким ID не найден' });
         }
 
-        const imageName = result.rows[0].image_name;
+        const imageUrl = result.rows[0].image_name;
 
-        if (imageName) {
-            const filePath = path.join(process.cwd(), 'uploads', imageName);
-
-            if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath);
-                console.log(`✓ Файл ${imageName} успешно удален из папки uploads`);
+        // 2. Если ссылка на картинку была в базе данных, удаляем её из Cloudinary
+        if (imageUrl) {
+            const publicId = getCloudinaryPublicId(imageUrl);
+            
+            if (publicId) {
+                // Отправляем запрос на удаление в Cloudinary
+                const cloudinaryResponse = await cloudinary.uploader.destroy(publicId);
+                
+                if (cloudinaryResponse.result === 'ok') {
+                    console.log(`✓ Файл ${publicId} успешно удален из Cloudinary`);
+                } else {
+                    console.log(`⚠️ Предупреждение Cloudinary: ${cloudinaryResponse.result} (возможно, файл уже был удален)`);
+                }
             }
         }
 
-        res.json({ success: true, message: `Пост №${id} и его изображение успешно удалены` });
+        res.json({ success: true, message: `Пост №${id} и его изображение из Cloudinary успешно удалены` });
     } catch (err) {
         console.error("ОШИБКА ТУТ:", err);
-        res.status(500).json({ success: false, message: 'Ошибка базы данных или удаления файла' });
+        res.status(500).json({ success: false, message: 'Ошибка базы данных или удаления файла из облака' });
     }
 });
+
 
 // ==============================swiper manipulation=====================================
 app.get('/api/admin/slider', async (req, res) => {
