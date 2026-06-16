@@ -76,47 +76,69 @@ questionsCard.forEach((item) => {
 });
 
 //   ======================================blog===========================================================
+// Запоминаем ширину экрана для защиты от бага Safari с адресной строкой
+let lastWidth = window.innerWidth;
+
 async function loadBlogs() {
-  const response = await fetch(`${BASE_API_URL}/get-blogs`);
-  const blogs = await response.json();
-  const container = document.getElementById('blog-container');
+  try {
+    const response = await fetch(`${BASE_API_URL}/get-blogs`);
+    const blogs = await response.json();
+    const container = document.getElementById('blog-container');
 
-  container.innerHTML = blogs.map(post => `
-    <div class="blog-card">
-        <h2 class="blog-id"> ${post.id}</h2> 
-        ${post.image_name ? `<img src="${post.image_name}">` : ''}
-        <div class="blog-card-content">
-            <h3>${escapeHtml(post.title)}</h3>
-            <small>${new Date(post.blog_date).toLocaleDateString()}</small>
-            <p class="blog_desk">${escapeHtml(post.content.substring(0, 100))}...</p>
-            <a href="blog.html?id=${post.id}" class="blog__btn">Читать далее</a>
+    // Рендерим ваши карточки блогов
+    container.innerHTML = blogs.map(post => `
+        <div class="blog-card">
+            <h2 class="blog-id"> ${post.id}</h2> 
+            ${post.image_name ? `<img src="${post.image_name}">` : ''}
+            <div class="blog-card-content">
+                <h3>${escapeHtml(post.title)}</h3>
+                <small>${new Date(post.blog_date).toLocaleDateString()}</small>
+                <p class="blog_desk">${escapeHtml(post.content.substring(0, 100))}...</p>
+                <a href="blog.html?id=${post.id}" class="blog__btn">Читать далее</a>
+            </div>
         </div>
-    </div>
-  `).join('');
+    `).join('');
 
-  // 🔥 Вызываем проверку высоты СРАЗУ после отрисовки карточек блогов!
-  checkBlogsHeight();
+    // Запускаем проверку высоты сразу после добавления карточек в HTML
+    checkBlogsHeight();
+
+  } catch (error) {
+    console.error("Ошибка при загрузке блогов:", error);
+  }
 }
 
-// Функция, которая проверяет, вылезли ли блоги за пределы экрана
+// Функция точного замера высоты (ждет загрузки картинок Cloudinary)
 function checkBlogsHeight() {
   const wrapper = document.getElementById('blogWrapper');
   const btn = document.getElementById('showMoreBtn');
   
-  // Убираем класс раскрытия перед замером
+  // Перед замером временно убеждаемся, что класс expanded снят
   wrapper.classList.remove('expanded');
 
-  // Небольшая задержка, чтобы картинки из Cloudinary успели занять место в DOM
-  setTimeout(() => {
-    if (wrapper.scrollHeight > wrapper.clientHeight) {
-      btn.style.display = 'block'; // Блогов много — показываем кнопку
+  // Находим все картинки внутри блогов
+  const images = wrapper.querySelectorAll('img');
+  
+  // Создаем массив промисов, чтобы дождаться загрузки каждого изображения
+  const imgPromises = Array.from(images).map(img => {
+    if (img.complete) return Promise.resolve();
+    return new Promise(resolve => {
+      img.onload = resolve;
+      img.onerror = resolve; // Если картинка сломана, всё равно продолжаем
+    });
+  });
+
+  // Как только все картинки загрузились и заняли свои места — меряем высоту
+  Promise.all(imgPromises).then(() => {
+    // +5 пикселей для компенсации погрешностей округления в субпиксельной сетке iOS
+    if (wrapper.scrollHeight > (wrapper.clientHeight + 5)) {
+      btn.style.display = 'block'; // Постов много — показываем кнопку
     } else {
-      btn.style.display = 'none';  // Блогов мало — прячем кнопку
+      btn.style.display = 'none';  // Постов мало — прячем кнопку
     }
-  }, 150);
+  });
 }
 
-// Функция работы кнопки "Показать ещё"
+// Логика клика по кнопке "Показать ещё" / "Свернуть"
 function toggleBlogs() {
   const wrapper = document.getElementById('blogWrapper');
   const btn = document.getElementById('showMoreBtn');
@@ -127,18 +149,32 @@ function toggleBlogs() {
     btn.textContent = 'Свернуть';
   } else {
     btn.textContent = 'Показать ещё';
-    // Плавно возвращаем к началу блогов при сворачивании
-    wrapper.scrollIntoView({ behavior: 'smooth' });
+    
+    // Проверяем, зашел ли пользователь с устройства Apple
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+
+    if (isIOS) {
+      // Для iOS: мгновенный возврат к началу блока (smooth-скролл на больших блоках в iOS багует)
+      wrapper.scrollIntoView({ behavior: 'auto', block: 'start' });
+    } else {
+      // Для Android и ПК: оставляем красивый плавный скролл
+      wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }
 
-// Пересчитываем высоту, если пользователь изменил размер окна браузера
-window.addEventListener('resize', checkBlogsHeight);
+// Умный слушатель изменения экрана. Игнорирует скрытие адресной строки на iPhone!
+window.addEventListener('resize', () => {
+  if (window.innerWidth !== lastWidth) {
+    lastWidth = window.innerWidth; // Обновляем ширину, если перевернули экран
+    checkBlogsHeight();            // Пересчитываем только при реальном изменении размера
+  }
+});
 
+// Запускаем всё приложение
 loadBlogs();
 
-
-loadBlogs();
 // ============================================window-show======================================================================
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {

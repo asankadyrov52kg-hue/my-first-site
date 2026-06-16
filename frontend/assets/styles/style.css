@@ -1139,30 +1139,38 @@ span {
   padding: 10px 20px;
   border-radius: 10px;
 }
-
+/* Контейнер-ограничитель (показывает примерно 1-2 ряда карточек) */
 .blog-wrapper {
-  max-height: 480px;
+  max-height: 450px; /* Настройте эту высоту под размер вашей одной карточки */
   overflow: hidden;
   position: relative;
-  transition: max-height 0.5s ease-in-out; 
+  transition: max-height 0.4s ease-in-out; /* Плавное раскрытие */
 }
 
+/* Класс полного раскрытия, адаптированный под Safari */
 .blog-wrapper.expanded {
-  max-height: 10000px; 
+  max-height: 4000px;
 }
 
-/* Кнопка "Показать ещё" */
+/* Стили кнопки "Показать ещё" */
 .show-more-btn {
-  display: none;
-  margin: 20px auto;
+  display: none; /* Изначально скрыта, включается через JS */
+  margin: 25px auto;
   background: #007bff;
   color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 12px 28px;
   font-size: 16px;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  font-family: sans-serif;
+  transition: background 0.2s;
 }
+
+.show-more-btn:hover {
+  background: #0056b3;
+}
+
 
 #loginForm.active1 {
   top: 150px;
