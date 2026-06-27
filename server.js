@@ -626,7 +626,19 @@ bot1.on('callback_query', async (callbackQuery) => {
 
 async function sendRequestsList(chatId, userId) {
     try {
-        const dbResult = await pool.query('SELECT id, name FROM request ORDER BY id DESC');
+        // 1. Сначала удаляем из базы все старые заявки, оставляя только 5 последних по ID
+        await pool.query(`
+            DELETE FROM request 
+            WHERE id NOT IN (
+                SELECT id FROM request 
+                ORDER BY id DESC 
+                LIMIT 5
+            )
+        `);
+
+        // 2. Достаем оставшиеся 5 последних заявок
+        const dbResult = await pool.query('SELECT id, name FROM request ORDER BY id DESC LIMIT 5');
+        
         if (dbResult.rows.length === 0) {
             return bot1.sendMessage(chatId, 'Заявок в базе пока нет.');
         }
@@ -635,8 +647,10 @@ async function sendRequestsList(chatId, userId) {
         let currentRow = [];
 
         dbResult.rows.forEach((row, index) => {
+            const clientName = row.name ? String(row.name).substring(0, 8) : 'Без имени';
+            
             currentRow.push({ 
-                text: `№${row.id} ${row.name.substring(0, 8)}`, 
+                text: `№${row.id} ${clientName}`, 
                 callback_data: `view_id_${row.id}` 
             });
 
@@ -648,17 +662,18 @@ async function sendRequestsList(chatId, userId) {
 
         keyboardButtons.push([{ text: '🔒 Выйти (Закрыть доступ)', callback_data: 'lock_bot_session' }]);
 
-        await bot1.sendMessage(chatId, `📝 **В базе данных найдено заявок: ${dbResult.rows.length}**\nНажмите на нужную кнопку ниже, чтобы открыть контакты клиента:`, {
+        await bot1.sendMessage(chatId, `📝 **В базе данных сохранено последних заявок: ${dbResult.rows.length}**\n*(Остальные старые заявки были автоматически удалены)*\n\nНажмите на кнопку ниже, чтобы открыть контакты:`, {
             parse_mode: 'Markdown',
             reply_markup: {
                 inline_keyboard: keyboardButtons
             }
         });
     } catch (err) {
-        console.error('Ошибка получения списка:', err);
-        await bot1.sendMessage(chatId, '❌ Ошибка сервера при чтении списка.');
+        console.error('Ошибка очистки и получения списка:', err);
+        await bot1.sendMessage(chatId, '❌ Ошибка сервера при обработке и чтении списка.');
     }
 }
+
 
 
 // ================================================privacy===============================================================
